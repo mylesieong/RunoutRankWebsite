@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Runout Rank">
+  <rect width="64" height="64" rx="12" fill="#111413"/>
+  <g transform="rotate(-14 32 32)">
+    <rect x="-6" y="22" width="76" height="20" fill="#1B5E3B"/>
+    <rect x="-6" y="20.5" width="76" height="1.6" fill="#404942"/>
+    <g fill="none" stroke="#E8DCC8" stroke-width="3.4">
+      <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)"/>
+      <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)"/>
+    </g>
+    <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+  </g>
+</svg>

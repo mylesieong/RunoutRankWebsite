@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mylesieong.github.io/products/runout-rank/sitemap.xml
