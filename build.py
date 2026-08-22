@@ -19,8 +19,17 @@ from datetime import date
 
 SITE_URL = "https://mylesieong.github.io/products/runout-rank/"
 SITE_NAME = "Runout Rank"
-TAGLINE = "Pool skill rating test and training app for Android and iOS"
-LASTMOD = "2026-08-20"
+TAGLINE = "Absolute pool skill rating test and training app for Android and iOS"
+
+# Every page carries a visible byline and machine-readable dates. FIRST_PUBLISHED is
+# when the site went up; UPDATED is the date of the current copy. Individual pages can
+# override either through the "published"/"updated" keys in PAGES.
+AUTHOR_NAME = "Sai Ieong"
+AUTHOR_TITLE = "Creator of Runout Rank"
+AUTHOR_URL = SITE_URL + "index.html"
+FIRST_PUBLISHED = "2026-08-20"
+UPDATED = "2026-08-22"
+LASTMOD = UPDATED
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -29,6 +38,7 @@ NAV = [
     ("how-it-works.html", "How it works"),
     ("levels.html", "Levels"),
     ("practice.html", "Practice"),
+    ("fargo-rate-alternative.html", "vs Fargo Rate"),
     ("runout-pro.html", "Runout Pro"),
     ("faq.html", "FAQ"),
 ]
@@ -44,10 +54,61 @@ LOGO_SVG = """<svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"
       </g>
     </svg>"""
 
-STORE_BLOCK = """<div class="store-links">
-        <div class="store-link" aria-label="Coming soon to the App Store"><span>Coming soon</span><span>App Store</span></div>
-        <div class="store-link" aria-label="Coming soon to Google Play"><span>Coming soon</span><span>Google Play</span></div>
+PLAY_URL = "https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"
+
+STORE_BLOCK = f"""<div class="store-links">
+        <a class="store-link" href="{PLAY_URL}"><span>Get it on</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="In review for the App Store"><span>In review</span><span>App Store</span></div>
       </div>"""
+
+
+def pretty_date(iso):
+    """2026-08-22 -> 22 August 2026, the form used in the visible byline."""
+    y, m, d = (int(part) for part in iso.split("-"))
+    months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
+    return f"{d} {months[m - 1]} {y}"
+
+
+def byline(published, updated):
+    """Visible authorship line. The <time> elements carry the machine-readable dates."""
+    updated_part = ""
+    if updated != published:
+        updated_part = (f' <span aria-hidden="true">&middot;</span> Updated '
+                        f'<time datetime="{updated}">{pretty_date(updated)}</time>')
+    return f"""      <p class="byline">
+        By <span class="byline-author">{AUTHOR_NAME}</span>,
+        {AUTHOR_TITLE} <span aria-hidden="true">&middot;</span>
+        Published <time datetime="{published}">{pretty_date(published)}</time>{updated_part}
+      </p>"""
+
+
+AUTHOR_SCHEMA = f"""{{
+      "@type": "Person",
+      "name": "{AUTHOR_NAME}",
+      "jobTitle": "{AUTHOR_TITLE}",
+      "url": "{AUTHOR_URL}"
+    }}"""
+
+
+def article_schema(headline, description, slug, published, updated):
+    return f"""{{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {json.dumps(headline)},
+  "description": {json.dumps(description)},
+  "image": "{SITE_URL}assets/img/og-image.png",
+  "author": {AUTHOR_SCHEMA},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "{SITE_NAME}",
+    "url": "{SITE_URL}"
+  }},
+  "datePublished": "{published}",
+  "dateModified": "{updated}",
+  "inLanguage": "en",
+  "mainEntityOfPage": "{SITE_URL}{slug}"
+}}"""
 
 
 def header(current):
@@ -80,8 +141,9 @@ FOOTER = f"""  <footer class="site-footer">
       <div class="footer-grid">
         <div>
           <a class="brand" href="index.html">{LOGO_SVG} Runout&nbsp;Rank</a>
-          <p style="margin-top:12px;max-width:24rem">A ten-table run-out test on your own pool table,
-          a 0&ndash;100 rating, and the level that beats you. No account, no server, no internet needed.</p>
+          <p style="margin-top:12px;max-width:24rem">An absolute pool rating from a ten-table run-out
+          test on your own table. A 0&ndash;100 number in one sitting &mdash; no league, no 200-game wait,
+          no account, no internet needed.</p>
         </div>
         <div>
           <h4>The app</h4>
@@ -93,8 +155,11 @@ FOOTER = f"""  <footer class="site-footer">
           </ul>
         </div>
         <div>
-          <h4>More</h4>
+          <h4>Guides</h4>
           <ul>
+            <li><a href="fargo-rate-alternative.html">Fargo Rate alternative</a></li>
+            <li><a href="pool-rating-without-a-league.html">A rating without a league</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative ratings</a></li>
             <li><a href="pool-skill-level-test.html">Pool skill level test guide</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="privacy-policy.html">Privacy policy</a></li>
@@ -103,9 +168,13 @@ FOOTER = f"""  <footer class="site-footer">
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; {date.today().year} Runout Rank. Built for players, not for arcade pool.</span>
+        <span>&copy; {date.today().year} Runout Rank. Written and built by {AUTHOR_NAME}.</span>
         <span>Android &amp; iOS &middot; Dark mode only, like the app</span>
       </div>
+      <p class="disclaimer">Fargo Rate and FargoRate are trademarks of their respective owner.
+      Runout Rank is an independent app and is not affiliated with, endorsed by, or connected to
+      FargoRate, the BCA, the APA or any league operator. Comparisons on this site describe published
+      behaviour of those systems and are offered for the reader&rsquo;s own judgement.</p>
     </div>
   </footer>"""
 
@@ -121,14 +190,24 @@ CTA = f"""  <section class="cta band">
   </section>"""
 
 
-def page(slug, title, description, body, extra_schema=None, noindex=False, keywords=None):
+def page(slug, title, description, body, extra_schema=None, noindex=False, keywords=None,
+         published=None, updated=None, dated=False):
     canonical = SITE_URL + ("" if slug == "index.html" else slug)
     robots = "noindex, follow" if noindex else "index, follow, max-image-preview:large"
+    published = published or FIRST_PUBLISHED
+    updated = updated or UPDATED
     schema = ""
     if extra_schema:
         for block in extra_schema:
             schema += f'  <script type="application/ld+json">\n{block}\n  </script>\n'
     kw = f'  <meta name="keywords" content="{html.escape(keywords)}">\n' if keywords else ""
+    dates = "" if not dated else f"""  <meta name="author" content="{AUTHOR_NAME}">
+  <meta name="date" content="{published}">
+  <meta name="last-modified" content="{updated}">
+  <meta property="article:author" content="{AUTHOR_NAME}">
+  <meta property="article:published_time" content="{published}">
+  <meta property="article:modified_time" content="{updated}">
+"""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,7 +238,7 @@ def page(slug, title, description, body, extra_schema=None, noindex=False, keywo
   <meta name="twitter:title" content="{html.escape(title)}">
   <meta name="twitter:description" content="{html.escape(description)}">
   <meta name="twitter:image" content="{SITE_URL}assets/img/og-image.png">
-{schema}</head>
+{dates}{schema}</head>
 <body>
 {header(slug)}
   <main id="main">
@@ -200,11 +279,14 @@ APP_SCHEMA = f"""{{
   "operatingSystem": "Android, iOS",
   "url": "{SITE_URL}",
   "image": "{SITE_URL}assets/img/og-image.png",
-  "description": "Runout Rank is a billiards skill-rating app. Take a ten-table run-out test on a real pool table, get a 0-100 rating and a tier from Rookie to Master, then practise at the level that beats you. All data stays on your device.",
+  "description": "Runout Rank is an absolute billiards skill-rating app. Take a ten-table run-out test on a real pool table, get a 0-100 rating and a tier from Rookie to Master in a single session, then practise at the level that beats you. The rating measures you against fixed layouts rather than against local opponents, so it needs no league, no 200-game history and no opponents at all. All data stays on your device.",
   "featureList": [
+    "Absolute rating: measured against fixed generated layouts, not against local opponents",
+    "A full 0-100 rating from one ten-table session, with no minimum game count to serve out",
+    "Portable between cities, leagues and countries because the yardstick never changes",
     "Ten-table Rating Test with a 0-100 rating and a named tier",
     "Six challenge levels from Rookie to Master",
-    "Seeded tests that are identical for every player on Android and iOS",
+    "Fixed level constraints, so the same rating means the same thing anywhere",
     "Endless randomly generated practice layouts",
     "Training log with favourites",
     "Lifetime run-out rate, streaks and per-level statistics",
@@ -234,16 +316,16 @@ SITE_SCHEMA = f"""{{
 INDEX = f"""  <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">Billiards skill rating &middot; Android &amp; iOS</p>
-        <h1>How good are you at pool, <span class="accent">really</span>?</h1>
-        <p class="lead">You have put in the hours. Runout Rank turns them into a number.
-        Take a ten-table run-out test on your own table, get a 0&ndash;100 rating and a tier from
-        Rookie to Master, then train at the level that is actually beating you.</p>
+        <p class="eyebrow">Absolute pool rating &middot; Android &amp; iOS</p>
+        <h1>Your pool rating. <span class="accent">Tonight</span>, not in 200 games.</h1>
+        <p class="lead">League ratings need hundreds of matches before the number means anything, and
+        what you get depends on who your city happens to have. Runout Rank measures you against the
+        table instead: ten layouts, one attempt each, a 0&ndash;100 rating in one session.</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="how-it-works.html">See how the test works</a>
-          <a class="btn btn--ghost" href="levels.html">Browse the six levels</a>
+          <a class="btn btn--primary" href="{PLAY_URL}">Get it on Google Play</a>
+          <a class="btn btn--ghost" href="how-it-works.html">How the test works</a>
         </div>
-        <p class="hero-note">No account &middot; No sign-in &middot; Works offline &middot; Data stays on your device</p>
+        <p class="hero-note">No league &middot; No opponents &middot; No account &middot; Works offline</p>
       </div>
       <div class="hero-shot">
         <div class="phone">
@@ -258,10 +340,10 @@ INDEX = f"""  <section class="hero">
   <section class="tight band">
     <div class="container">
       <div class="grid grid--4">
-        <div><span class="stat">10</span><p class="dim">tables per test, one attempt each &mdash; no retries, no skips</p></div>
-        <div><span class="stat">0&ndash;100</span><p class="dim">rating with a named tier, the moment the test ends</p></div>
-        <div><span class="stat">6</span><p class="dim">levels from Rookie to Master, none of them locked</p></div>
-        <div><span class="stat">0</span><p class="dim">accounts, servers and network calls required</p></div>
+        <div><span class="stat">10</span><p class="dim">tables per test, one attempt each</p></div>
+        <div><span class="stat">1</span><p class="dim">session to a full rating, not a 200-game wait</p></div>
+        <div><span class="stat">0&ndash;100</span><p class="dim">rating and a tier, the moment you finish</p></div>
+        <div><span class="stat">0</span><p class="dim">leagues, opponents and accounts required</p></div>
       </div>
     </div>
   </section>
@@ -269,28 +351,21 @@ INDEX = f"""  <section class="hero">
   <section>
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">The difference</p>
-        <h2>Random layouts. <span class="accent">Identical for everyone.</span></h2>
-        <p class="lead">Most skill tests use the same fixed layouts, so sooner or later you are
-        practising the answers rather than the skill. Runout Rank generates every table randomly
-        &mdash; but from a seed. Level&nbsp;3 Test&nbsp;#12 is the same ten tables for every player,
-        on Android and on iOS.</p>
+        <p class="eyebrow">Why bother</p>
+        <h2>A league rating costs a season <span class="accent">and still moves with your city.</span></h2>
       </div>
-      <div class="grid grid--3">
-        <div class="card">
-          <h3>Unpredictable to you</h3>
-          <p>You cannot memorise a layout you have never seen. Every test you start is generated,
-          not pulled from a fixed set of drills.</p>
+      <div class="compare">
+        <div class="card pain">
+          <h3>200 games before it is real</h3>
+          <p>FargoRate treats 200 games as the minimum for an established rating. That is a league, a
+          season and a set of fees before you find out where you stand.</p>
+          <p><a href="pool-rating-without-a-league.html">A rating without a league &rarr;</a></p>
         </div>
-        <div class="card">
-          <h3>Comparable to anyone</h3>
-          <p>Share a test number and a friend gets the identical ten tables. Two scores from the same
-          level and test number mean the same thing.</p>
-        </div>
-        <div class="card">
-          <h3>Proven across platforms</h3>
-          <p>The generator is pinned by golden-vector tests on both platforms, so an Android score and
-          an iOS score are the same measurement.</p>
+        <div class="card pain">
+          <h3>Your number describes your postcode</h3>
+          <p>A relative rating is anchored to the players around you, so a thin or isolated local scene
+          drifts against the rest of the world.</p>
+          <p><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative &rarr;</a></p>
         </div>
       </div>
     </div>
@@ -299,47 +374,72 @@ INDEX = f"""  <section class="hero">
   <section class="band">
     <div class="container">
       <div class="section-head">
+        <p class="eyebrow">The answer</p>
+        <h2>Measure the player against the <span class="accent">table</span>, not the room.</h2>
+        <p class="lead">Every level fixes exactly what makes it hard &mdash; ball count, ball in hand,
+        how tightly the balls are packed, blockers. Those constraints are the yardstick, and they are
+        the same for everyone. Beat them and the number goes up. Nothing else moves it.</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>Absolute, not relative</h3>
+          <p>No opponent pool to be strong or weak, and nothing to drift against.</p>
+        </div>
+        <div class="card">
+          <h3>One session, not one season</h3>
+          <p>About an hour at the table, and you finish with a real rating rather than a placeholder.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing to memorise</h3>
+          <p>Layouts are generated fresh for every test, so you meet the level, never a drill you have
+          already learned the answer to.</p>
+        </div>
+      </div>
+      <p style="margin-top:28px"><a href="fargo-rate-alternative.html">The full comparison with Fargo Rate &rarr;</a></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
         <p class="eyebrow">How it works</p>
         <h2>Three steps, one sitting</h2>
       </div>
       <div class="grid grid--3 steps">
         <div class="card step">
           <h3>Rack what the app draws</h3>
-          <p>Each table is drawn top-down with the cue ball, the object balls and any blockers, so you
-          can set the exact layout up on the table in front of you.</p>
+          <p>Each table is drawn top-down, so you can set the exact layout up in front of you.</p>
         </div>
         <div class="card step">
           <h3>Play it once</h3>
-          <p>Run out or miss, then record it with one tap. One attempt per table &mdash; that is what
-          makes the score at the end mean something.</p>
+          <p>Run out or miss, then record it with one tap. No retries, no skips.</p>
         </div>
         <div class="card step">
           <h3>Get a rating and a plan</h3>
-          <p>Score out of ten, a 0&ndash;100 rating, your tier, whether you cleared the level, and the
-          level that is beating you. Practise there in one tap.</p>
+          <p>A score, a rating, your tier &mdash; and the level that is beating you, to practise at next.</p>
         </div>
       </div>
-      <p style="margin-top:28px"><a href="how-it-works.html">Read the full explanation of the rating &rarr;</a></p>
+      <p style="margin-top:28px"><a href="how-it-works.html">Read the full explanation &rarr;</a></p>
     </div>
   </section>
 
-  <section>
+  <section class="band">
     <div class="container">
       <div class="feature">
         <div class="feature-media">
           <div class="phone"><img src="assets/img/screen-test.png" width="1080" height="2400" loading="lazy" decoding="async"
-            alt="A Rating Test in progress showing table 6 of 10, the generated layout, and the run-out and miss buttons."></div>
+            alt="A Rating Test in progress: table 6 of 10 drawn top-down with four numbered object balls on the cloth, and the Ran out and Missed buttons below."></div>
         </div>
         <div>
-          <p class="eyebrow">The Rating Test</p>
-          <h3>Ten tables. One attempt each.</h3>
-          <p>You always know where you stand mid-test: which table you are on, which ones you ran out,
-          which ones you missed. Get interrupted and the test resumes at the exact table you stopped on,
-          so a phone call or a closing venue does not cost you the sitting.</p>
+          <p class="eyebrow">The table</p>
+          <h3>This is what a table looks like.</h3>
+          <p>Each one is drawn top-down, to scale, so you can rack it on the cloth in front of you and
+          play the real shot. It stays on screen for the whole attempt, so you can rebuild the layout
+          if you knock it about.</p>
           <ul class="ticks">
-            <li>One tap to record a run-out or a miss</li>
-            <li>No retries and no skips &mdash; the score is honest by construction</li>
-            <li>Quitting takes a confirmation, so you never discard a run by accident</li>
+            <li><strong>The numbers are the order</strong> you have to pot them in &mdash; not ball values</li>
+            <li><strong>Blockers</strong> are drawn drab and unnumbered: in your way, not in the sequence</li>
+            <li><strong>The cue ball</strong> appears from Advanced up. Below that you have ball in hand</li>
           </ul>
         </div>
       </div>
@@ -352,45 +452,9 @@ INDEX = f"""  <section class="hero">
         <div>
           <p class="eyebrow">The result</p>
           <h3>A rating, and the level that <span class="gold">beats you</span>.</h3>
-          <p>Seven out of ten clears a level. The result screen gives you the score, the 0&ndash;100
-          rating, your tier and how far the rating moved since your last test &mdash; then names your
-          edge level in plain language and sends you straight there to practise.</p>
-          <ul class="ticks">
-            <li>Rating delta so improvement is visible immediately</li>
-            <li>Share the result as a card or as text naming the level and test number</li>
-            <li>Whoever you send it to can take the identical test</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-media">
-          <div class="phone"><img src="assets/img/screen-levels.png" width="1080" height="2400" loading="lazy" decoding="async"
-            alt="The levels screen showing the six-level ladder with the current edge level highlighted in gold."></div>
-        </div>
-        <div>
-          <p class="eyebrow">The ladder</p>
-          <h3>Six levels. Nothing locked.</h3>
-          <p>Rookie, Regular, League, Competitor, Advanced, Master. Each level tells you exactly what
-          makes it harder &mdash; ball count, whether you get ball in hand, how tightly the balls are
-          packed, and blockers. Test at any level you like; a strong player never has to grind up from
-          the bottom.</p>
-          <p><a href="levels.html">Compare all six levels &rarr;</a></p>
-        </div>
-      </div>
-
-      <div class="feature feature--flip">
-        <div class="feature-media">
-          <div class="phone"><img src="assets/img/screen-practice.png" width="1080" height="2400" loading="lazy" decoding="async"
-            alt="A practice session showing a generated four-ball layout and the success and failed buttons."></div>
-        </div>
-        <div>
-          <p class="eyebrow">Practice</p>
-          <h3>Set it up on your own table.</h3>
-          <p>An endless stream of randomly generated layouts at whatever level you choose. Log a
-          success or a failure with one tap, retry the same layout until you own it, skip one you do
-          not fancy, or come straight back to the last table you generated.</p>
-          <p><a href="practice.html">More on practice and the training log &rarr;</a></p>
+          <p>Seven out of ten clears a level. You get the score, the 0&ndash;100 rating, your tier and
+          how far the number has moved since last time &mdash; then the level currently beating you,
+          with practice at it one tap away.</p>
         </div>
       </div>
 
@@ -402,32 +466,31 @@ INDEX = f"""  <section class="hero">
         <div>
           <p class="eyebrow">Progress</p>
           <h3>See whether practice is working.</h3>
-          <p>Where you stand is free, permanently: rating, tier, cleared level, edge level, lifetime
-          attempts, run-out rate, best streak and the per-level breakdown. Runout Pro adds the history
-          &mdash; every test plotted over time, the full test log, and CSV export.</p>
-          <p><a href="runout-pro.html">What Runout Pro adds &rarr;</a></p>
+          <p>Rating, tier, cleared level, lifetime run-out rate and best streak &mdash; free,
+          permanently. <a href="runout-pro.html">Runout Pro</a> adds the history: every test plotted
+          over time and CSV export.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band">
+  <section>
     <div class="container">
-      <div class="grid grid--2">
+      <div class="grid grid--3">
         <div class="card">
-          <p class="eyebrow">Privacy</p>
-          <h3>Your record never leaves your phone</h3>
-          <p>Tests, attempts, favourites and statistics are stored only in the app's private storage
-          on your own device. There is no account to create and nothing to sign in to, and your
-          history survives app updates.</p>
-          <p><a href="privacy-policy.html">Read the privacy policy &rarr;</a></p>
+          <h3>Six levels, none locked</h3>
+          <p>Rookie to Master. Test at any of them &mdash; a strong player never grinds up from the
+          bottom. <a href="levels.html">Compare the levels &rarr;</a></p>
         </div>
         <div class="card">
-          <p class="eyebrow">Same app, either platform</p>
-          <h3>Android and iOS, identical scoring</h3>
-          <p>The test generator and the rating maths are shared code, verified against the same golden
-          vectors on both platforms. The phone you happen to own has no effect on your rating.</p>
-          <p><a href="pool-skill-level-test.html">Why a repeatable test beats a guess &rarr;</a></p>
+          <h3>Practice at your edge</h3>
+          <p>Endless generated layouts at the level that beat you, with a log of everything you have
+          run. <a href="practice.html">More on practice &rarr;</a></p>
+        </div>
+        <div class="card">
+          <h3>Your record stays yours</h3>
+          <p>No account, no server, works offline. Everything lives on your device.
+          <a href="privacy-policy.html">Privacy policy &rarr;</a></p>
         </div>
       </div>
     </div>
@@ -483,24 +546,38 @@ HOW = f"""  <section class="page-head">
       </ul>
       <p>From that screen, practising at your edge level is one tap.</p>
 
-      <h2>Why the tests are random <em>and</em> comparable</h2>
-      <p>Every test is generated rather than picked from a fixed set, so there are no answers to
-      memorise in advance. But the generator is seeded by the level and the test number, which means
-      <strong>Level&nbsp;3 Test&nbsp;#12 is the identical ten tables for every player</strong>, on
-      Android and on iOS alike.</p>
-      <p>That is what lets you share a score. Send a friend the level and test number, they take the
-      same ten tables, and the two results are directly comparable &mdash; with no account, no server
-      and no leaderboard in between.</p>
+      <h2>Why random layouts still produce a comparable score</h2>
+      <p>Every test is generated fresh, so there are no answers to memorise and no drill you can
+      rehearse in advance. Two players never meet the same ten tables &mdash; and they do not need to.</p>
+      <p>What is fixed is the <strong>level</strong>. Ball count, whether you get ball in hand, the
+      minimum spacing between balls and the number of blockers are defined constants, identical for
+      everyone on both platforms. A Level&nbsp;4 test always asks a Level&nbsp;4 question. Ten tables
+      is enough for the difficulty to average out, which is why the test is ten and not one.</p>
+      <p>So the thing being measured is you against the level&rsquo;s constraints, not you against ten
+      particular tables. That is what makes one player&rsquo;s 58 mean the same as another&rsquo;s.</p>
+
+      <h2>Why the rating is absolute</h2>
+      <p>No opponent appears anywhere in that calculation. League systems such as Fargo Rate are
+      <em>relative</em> &mdash; your number is derived from results against other rated players, which
+      is why they need a large game history before the rating settles, and why a weakly connected
+      local scene can sit high or low against the rest of the network. Runout Rank compares you to a
+      fixed standard instead. The level constraints are the same everywhere, so the rating is the same
+      measurement everywhere, from the very first test.</p>
+      <p>The one local variable is your equipment. Pocket cut, table size and cloth speed change how
+      hard a run-out is, so take the test on the table you actually play on and compare your own
+      numbers over time.</p>
+      <p><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative pool ratings &rarr;</a></p>
 
       <h2>What the rating is not</h2>
       <p>It is a measurement of your run-out ability on generated layouts, taken under a no-retry rule.
       It is not a handicap system, not a governing-body rating, and it does not talk to any league
-      database. It is an honest number you can take yourself, on your own table, whenever you want a
-      fresh one.</p>
+      database. If you need a number to handicap a match, that is what a league rating is for &mdash;
+      see <a href="fargo-rate-alternative.html">how the two compare</a>. This is an honest number you
+      can take yourself, on your own table, whenever you want a fresh one.</p>
 
       <div class="btn-row" style="margin-top:36px">
         <a class="btn btn--primary" href="levels.html">See the six levels</a>
-        <a class="btn btn--ghost" href="faq.html">Read the FAQ</a>
+        <a class="btn btn--ghost" href="fargo-rate-alternative.html">Compared with Fargo Rate</a>
       </div>
     </div>
   </section>
@@ -749,6 +826,7 @@ GUIDE = f"""  <section class="page-head">
       <h1>How to test your pool skill level</h1>
       <p class="lead">Most players can tell you who they beat. Very few can tell you how good they
       are. Here is what separates a skill test worth taking from a drill you happen to like.</p>
+{byline(FIRST_PUBLISHED, UPDATED)}
     </div>
   </section>
 
@@ -775,15 +853,17 @@ GUIDE = f"""  <section class="page-head">
       that particular table. A test worth repeating has to generate its layouts, so the pattern in
       front of you is genuinely new each time.</p>
 
-      <h2>3. It has to be repeatable in the same form for everyone</h2>
-      <p>Here is the tension: randomness makes a test honest, and it also makes two scores
+      <h2>3. Its difficulty has to be defined, not improvised</h2>
+      <p>Here is the tension: randomness makes a test honest, and it also threatens to make two scores
       incomparable. If your ten tables were harder than mine, our scores mean different things.</p>
-      <p>The fix is <strong>seeding</strong>. The layouts are generated by an algorithm from a fixed
-      starting number, so they are unpredictable to the player but perfectly reproducible for the
-      program. In Runout Rank, the seed is the level plus the test number: Level&nbsp;3 Test&nbsp;#12
-      is the same ten tables for every player, on Android and iOS alike. You cannot practise the
-      answers, and you can still compare your score to anyone else's &mdash; without an account, a
-      server, or a leaderboard.</p>
+      <p>The fix is to <strong>fix the constraints rather than the layouts</strong>. Define precisely
+      what a difficulty level means &mdash; how many object balls, whether you get ball in hand, the
+      minimum spacing between balls, how many blockers &mdash; and generate freely inside those rules.
+      Every layout is new, every layout is the same difficulty, and enough tables in a row average out
+      whatever luck is left. In Runout Rank those constants are published on the
+      <a href="levels.html">levels page</a> and are identical on Android and iOS.</p>
+      <p>That is what makes a score portable: it says you cleared seven of ten at Level&nbsp;4, and
+      Level&nbsp;4 means the same thing for everyone.</p>
 
       <h2>The rules that make a score honest</h2>
       <ul>
@@ -818,6 +898,19 @@ GUIDE = f"""  <section class="page-head">
       about right. Retesting after every session mostly measures noise; retesting twice a year tells
       you nothing you can act on.</p>
 
+      <h2>Why this beats waiting for a league rating to settle</h2>
+      <p>The alternative most players are pointed at is a relative rating earned through league play,
+      which needs a large history of games against other rated players before it means much &mdash;
+      FargoRate, for instance, treats 200 games as the minimum for an established rating. A run-out
+      test gives you the answer in one sitting because it measures you against the layouts rather than
+      against the room, which also means it does not shift with the strength of your local scene.
+      Further reading:</p>
+      <ul>
+        <li><a href="fargo-rate-alternative.html">A Fargo Rate alternative that does not need 200 league games</a></li>
+        <li><a href="pool-rating-without-a-league.html">How to get a pool rating without joining a league</a></li>
+        <li><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative pool ratings</a></li>
+      </ul>
+
       <div class="note">Runout Rank does all of this on the table you already play on: it generates
       the layouts, scores the run-outs, keeps the history on your device, and names the level to train
       at next. <a href="how-it-works.html">See exactly how the test works &rarr;</a></div>
@@ -826,6 +919,332 @@ GUIDE = f"""  <section class="page-head">
 
 {CTA}
 """
+
+# --------------------------------------------------------------------------
+# Positioning pages: the two pain points a relative league rating leaves open
+# --------------------------------------------------------------------------
+
+FARGO_DISCLAIMER = """      <p class="disclaimer">Runout Rank is independent and is not affiliated with, endorsed by or
+      connected to FargoRate. Everything said here about Fargo Rate is drawn from
+      <a href="https://www.fargorate.com/" rel="nofollow">FargoRate&rsquo;s own published material</a>
+      and is described as fairly as we know how; it is a good system, and this page is about where its
+      design does and does not fit a particular kind of player.</p>"""
+
+FARGO_ALT_TITLE = "A Fargo Rate alternative that does not need 200 league games"
+FARGO_ALT = f"""  <section class="page-head">
+    <div class="container">
+{breadcrumb("Fargo Rate alternative")}
+      <h1>A Fargo Rate alternative for players who will never play 200 league games</h1>
+      <p class="lead">Fargo Rate is the best relative rating pool has. But relative is exactly the
+      thing that makes it slow to earn and sensitive to where you live. Here is what an absolute
+      rating does differently, and which of the two you actually want.</p>
+{byline(UPDATED, UPDATED)}
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>First, credit where it is due</h2>
+      <p>Fargo Rate put amateurs and world champions on one scale and made pool handicapping something
+      you can argue about with numbers instead of reputations. If you play league matches every week
+      against other rated players, it works, and this page is not going to pretend otherwise. Keep it.</p>
+      <p>The question this page is about is narrower: <strong>what do you do if you are not that
+      player?</strong> If you practise alone, play casually with friends, travel, or simply want to
+      know how good you are without signing up to a season of matches, a relative rating has two
+      structural problems &mdash; and they are structural, not bugs.</p>
+
+      <h2>Pain point one: the number is not real until 200 games</h2>
+      <p>FargoRate calls the size of your game history <em>robustness</em>, and states plainly that a
+      robustness of 200 games is the minimum for it to consider a rating
+      &ldquo;established&rdquo;. Under that threshold your official rating is a blend of your actual
+      performance and a <em>starter rating</em> &mdash; an initial guess &mdash; with the guess losing
+      influence as you close the gap to 200.</p>
+      <p>Count what 200 rated games costs a normal person. It means finding a league that reports to
+      the system, paying its fees, being free on the same evening every week, and playing out most of
+      a season or two &mdash; before the number in the app is a measurement of you rather than a
+      weighted opinion. A player who wants a single honest answer to &ldquo;how good am I?&rdquo; has
+      to buy a year of commitment to get it.</p>
+      <p>And there is no way to shortcut it, because there is nothing to shortcut: a relative system
+      genuinely cannot know anything about you until you have generated enough results against people
+      it already knows.</p>
+      <p><a href="pool-rating-without-a-league.html">How to get a pool rating without joining a league &rarr;</a></p>
+
+      <h2>Pain point two: your rating partly describes your city</h2>
+      <p>A relative rating is computed from who beat whom. That means your number is only as anchored
+      as the chain of games connecting your local players to the rest of the rated world. Where that
+      chain is thick &mdash; big cities, strong touring scenes, players who travel to open events
+      &mdash; ratings line up well. Where it is thin, a local group can settle at a level that does
+      not match the same numbers elsewhere.</p>
+      <p>This is not an outsider&rsquo;s complaint. FargoRate&rsquo;s own writing describes two nearly
+      isolated groups of players, one rated too high relative to the other, as a particularly vexing
+      problem &mdash; one that only corrects itself through a lot of cross-play over a long time. Its
+      definition of a reliable rating likewise notes that games against opponents with established
+      ratings count for more.</p>
+      <p>So if your region is packed with strong players, or barely connected to the wider network, or
+      new to the system, the number you carry is telling you something about your surroundings as well
+      as about you. Move somewhere else and it may not mean what it meant at home.</p>
+      <p><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative ratings, explained &rarr;</a></p>
+
+      <h2>What an absolute rating does instead</h2>
+      <p>Runout Rank removes opponents from the measurement altogether. Instead of asking who you beat,
+      it puts a defined layout on the table and asks whether you can run it out.</p>
+      <p>You play ten generated tables at one level, one attempt each, no retries and no skips, and
+      record each as a run-out or a miss. Ten answers become a score, a 0&ndash;100 rating and a tier
+      from Rookie to Master. Seven of ten clears the level. The whole thing takes about an hour on the
+      table you already play on.</p>
+      <p>Because the layouts are the yardstick and the yardstick never changes, the number means the
+      same thing whoever else is in the room, and the same thing next year as this year. It is earned
+      from the first session, not accumulated over a season.</p>
+
+      <h2>Side by side</h2>
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Relative league ratings compared with the Runout Rank absolute rating</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Relative rating (Fargo Rate and similar)</th>
+              <th scope="col">Runout Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">What it measures</th><td>Results against other rated players</td><td>Run-outs against fixed generated layouts</td></tr>
+            <tr><th scope="row">Before it means something</th><td>200 games for an established rating; a starter rating is blended in below that</td><td>One ten-table test, roughly an hour</td></tr>
+            <tr><th scope="row">What you need</th><td>A reporting league or rated events, opponents, fees, a schedule</td><td>A pool table and a phone</td></tr>
+            <tr><th scope="row">Effect of your local scene</th><td>Real: connectivity and the strength of your player pool influence the number</td><td>None: no opponents are involved</td></tr>
+            <tr><th scope="row">Portability</th><td>Travels within the network; weakly connected regions can drift</td><td>The same level constraints everywhere, on Android and iOS</td></tr>
+            <tr><th scope="row">Good for</th><td>Handicapping matches, tournament brackets, league eligibility</td><td>Knowing your own standard and what to practise next</td></tr>
+            <tr><th scope="row">Not for</th><td>Answering &ldquo;how good am I?&rdquo; on day one</td><td>Handicapping a match against someone else &mdash; it is not a handicap system</td></tr>
+            <tr><th scope="row">Cost and account</th><td>League membership; an online profile</td><td>Free app, no account, works fully offline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Be clear about what Runout Rank is not</h2>
+      <p>It does not replace a league rating for handicapping, and it will not get you seeded in a
+      tournament. No governing body recognises it. It is also honest about its own variable: you are
+      playing on your own equipment, so a tight-pocketed table with slow cloth will read differently
+      from a bar box. Take the test on the table you actually compete on, and compare like with like
+      over time.</p>
+      <p>What it gives you is the thing a relative system cannot give you cheaply: a real number today,
+      from your own play, that does not depend on anyone else.</p>
+
+      <h2>The obvious answer: use both</h2>
+      <p>They measure different things and they do not conflict. If you play league, keep your Fargo
+      Rate for matches, and use Runout Rank between them to tell you which part of your game is behind
+      &mdash; a run-out test names the level that beats you and hands you practice at it, which a
+      match-result rating cannot do. If you do not play league, Runout Rank is the number you can
+      actually have.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="how-it-works.html">See how the test works</a>
+        <a class="btn btn--ghost" href="pool-rating-without-a-league.html">Get a rating without a league</a>
+      </div>
+{FARGO_DISCLAIMER}
+    </div>
+  </section>
+
+{CTA}
+"""
+
+NO_LEAGUE_TITLE = "How to get a pool rating without joining a league"
+NO_LEAGUE = f"""  <section class="page-head">
+    <div class="container">
+{breadcrumb("A rating without a league")}
+      <h1>How to get a pool rating without joining a league</h1>
+      <p class="lead">Every established rating system asks for the same entry fee: hundreds of matches
+      against other rated players. If that is not your life, you are not unratable &mdash; you just
+      need a rating that measures the table instead of the room.</p>
+{byline(UPDATED, UPDATED)}
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>Why casual players end up with no number at all</h2>
+      <p>The usual advice is: join a league that reports to a rating system, play a season, and your
+      rating will settle. That is sound advice, and for a lot of players it is also impossible. It asks
+      for a fixed evening every week, membership fees, a venue that runs a reporting league, and enough
+      opponents who are themselves rated.</p>
+      <p>Then there is the volume. FargoRate treats 200 games as the minimum robustness for calling a
+      rating established; below that, part of what you are looking at is the starter rating the system
+      assigned you rather than what you did. Two hundred rated games is a season or more for most
+      league players and a fantasy for everyone else.</p>
+      <p>So the honest position for a casual player is this: the effort of earning a relative rating is
+      larger than the value of knowing it. Most people quietly give up and go back to guessing from
+      who they beat down the club.</p>
+
+      <h2>What you are actually trying to find out</h2>
+      <p>Strip the systems away and there are usually three questions underneath:</p>
+      <ul>
+        <li><strong>Where do I stand?</strong> Am I a decent club player, or better than I think, or
+        worse?</li>
+        <li><strong>Am I improving?</strong> Not &ldquo;did I feel good tonight&rdquo; &mdash; is the
+        curve moving?</li>
+        <li><strong>What should I practise?</strong> Which part of the game is actually holding the
+        rest back?</li>
+      </ul>
+      <p>None of those three questions require an opponent. They require a fixed, repeatable task that
+      is hard enough to fail and a record of how often you complete it.</p>
+
+      <h2>The test that answers them</h2>
+      <p>A run-out is the right unit: clearing a table exercises pattern reading, position, speed
+      control and nerve in the order the table demands them, which a single potting drill does not.
+      Make it ten tables at one difficulty level, one attempt each, no retries and no skips, and you
+      have a measurement instead of a practice session.</p>
+      <p>That is what Runout Rank does. The app draws each layout top-down, you rack it on your own
+      table, play it once and tap run-out or miss. At the end you get a score out of ten, a
+      0&ndash;100 rating, a tier from Rookie to Master, whether you cleared the level, and the level
+      that is currently beating you. It takes about an hour and needs nobody else in the building.</p>
+      <p>Layouts are generated fresh for every test, so there is nothing to memorise, while the
+      level&rsquo;s constraints &mdash; ball count, ball in hand, spacing, blockers &mdash; are fixed
+      constants that are the same for every player on Android and iOS. New tables every time, the same
+      difficulty every time.</p>
+
+      <h2>A practical routine for a solo player</h2>
+      <ol>
+        <li><strong>Test at the level you think you can clear.</strong> Nothing is locked, so start
+        where you think you belong rather than at the bottom.</li>
+        <li><strong>Move up until a level beats you.</strong> Seven of ten clears a level; when you
+        cannot make seven, you have found your edge.</li>
+        <li><strong>Practise at the edge level,</strong> logging every attempt so the run-out rate is a
+        fact rather than an impression.</li>
+        <li><strong>Retest that level when the rate moves.</strong> Every two to four weeks suits most
+        players &mdash; often enough to track real work, rarely enough that you are not measuring
+        noise.</li>
+        <li><strong>Compare ratings, not feelings.</strong> The rating delta on the result screen is
+        the whole point.</li>
+      </ol>
+
+      <h2>What it costs you</h2>
+      <p>An hour, a table you can book, and nothing else. The app is free to download, there is no
+      account to create, it works entirely offline, and your history stays in the app&rsquo;s private
+      storage on your own device. Runout Pro is optional and adds history: your rating plotted across
+      every test, per-level progression and CSV export. Where you stand is free permanently.</p>
+
+      <h2>If you do play league</h2>
+      <p>Then keep your league rating &mdash; it is the right tool for handicapping matches, and this
+      is not a replacement for it. Use a run-out test alongside it, because a match-result rating tells
+      you the level you are at without telling you which part of your game is behind. See
+      <a href="fargo-rate-alternative.html">the full comparison with Fargo Rate</a>.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="how-it-works.html">How the test works</a>
+        <a class="btn btn--ghost" href="levels.html">See the six levels</a>
+      </div>
+{FARGO_DISCLAIMER}
+    </div>
+  </section>
+
+{CTA}
+"""
+
+ABSOLUTE_TITLE = "Absolute vs relative pool ratings: why your city changes your number"
+ABSOLUTE = f"""  <section class="page-head">
+    <div class="container">
+{breadcrumb("Absolute vs relative ratings")}
+      <h1>Absolute vs relative pool ratings</h1>
+      <p class="lead">Two players of identical ability, one in a strong city and one in a quiet one,
+      can carry different relative ratings for years. That is not a flaw in the maths &mdash; it is
+      what &ldquo;relative&rdquo; means. Here is the difference, and what each kind of rating is good
+      for.</p>
+{byline(UPDATED, UPDATED)}
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>What a relative rating is</h2>
+      <p>A relative rating &mdash; Elo, Glicko, Fargo Rate and the rest of the family &mdash; has no
+      notion of an absolute standard. It only knows results: you beat them, they beat someone else.
+      From a large enough web of those results, the system finds the set of numbers that best explains
+      the outcomes. Nobody ever measures a player directly; every rating is a position in a network of
+      other ratings.</p>
+      <p>That is an elegant design and it works remarkably well when the network is dense. It also
+      carries two consequences that no amount of clever maths removes.</p>
+
+      <h2>Consequence one: it needs a lot of games</h2>
+      <p>A result is one bit of evidence, and one bit is very little. So the system needs volume before
+      it can separate you from luck &mdash; which is why FargoRate uses a robustness measure and treats
+      200 games as the minimum for calling a rating established, blending a starter rating into the
+      number until you get there. Until you have paid that price in games, your rating is partly a
+      guess about you.</p>
+
+      <h2>Consequence two: it is anchored to your neighbours</h2>
+      <p>Because every rating is defined against other ratings, a group of players only lines up
+      correctly with the rest of the world if enough games connect them to it. Where that connection is
+      thin &mdash; an isolated region, a new league, a scene whose players rarely travel to open events
+      &mdash; the group can settle at a level that does not match the same numbers elsewhere. FargoRate
+      describes precisely this case, two nearly isolated groups with one rated too high relative to the
+      other, as a vexing problem, and notes that games against established opponents are worth more for
+      exactly this reason.</p>
+      <p>The practical version for a player: if your city is stacked with strong players, or barely
+      connected to the wider rated population, your number is partly a statement about your
+      surroundings. Two players of the same standard in different scenes need not read the same, and
+      neither of them can do anything about it except play more games against outsiders.</p>
+
+      <h2>What an absolute rating is</h2>
+      <p>An absolute rating measures performance against a fixed standard rather than against people.
+      Golf handicaps work this way against par. Athletics works this way against the clock. A stopwatch
+      does not care who else is in the race, and 10.4 seconds in Manila is 10.4 seconds in Manchester.</p>
+      <p>Pool has not traditionally had one, because pool lacks an obvious clock. Runout Rank supplies
+      the equivalent: a set of defined table layouts and one question &mdash; can you run this out? Ten
+      tables at a level, one attempt each, no retries and no skips. The number that comes out is
+      computed entirely from your own results against the layouts.</p>
+      <p>So there is no opponent pool to be strong or weak, nothing to drift against, and no minimum
+      number of games before the measurement is valid. You have your rating at the end of the first
+      session, and it means the same thing anywhere.</p>
+
+      <h2>How a fixed standard avoids becoming a memory test</h2>
+      <p>The obvious objection: a fixed set of layouts stops measuring skill as soon as you have played
+      it a few times, because you are then recalling solutions rather than finding them.</p>
+      <p>Runout Rank avoids that by fixing the <em>difficulty</em> rather than the tables. A level is a
+      set of published constants &mdash; object ball count, ball in hand or not, minimum spacing,
+      blockers &mdash; and layouts are generated fresh inside those rules every time. You never see the
+      same table twice, and every table asks the same question. Ten of them in a row average out what
+      luck remains.</p>
+
+      <h2>What an absolute rating cannot do</h2>
+      <p>It is not a handicap system, and it should not be used as one. A relative rating exists to
+      predict a match between two specific people, and it is far better at that than any absolute
+      measure &mdash; because match outcomes are what it is built from.</p>
+      <p>An absolute rating also has its own variable to keep honest: the equipment. Pocket cut, table
+      size and cloth speed all change how hard a run-out is, so a rating taken on a nine-foot table
+      with tight pockets is a different measurement from one taken on a bar box. Fix your conditions,
+      take the test on the table you compete on, and compare your own numbers over time.</p>
+
+      <h2>Which one do you want?</h2>
+      <div class="compare" style="margin:24px 0">
+        <div class="card">
+          <h3>Use a relative rating when</h3>
+          <ul class="ticks">
+            <li>You need a handicap for a match or a bracket</li>
+            <li>Your league or tournament requires one</li>
+            <li>You already play enough rated games to keep it robust</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Use an absolute rating when</h3>
+          <ul class="ticks ticks--gold">
+            <li>You want to know where you stand without playing a season first</li>
+            <li>You practise alone, travel, or move between scenes</li>
+            <li>You want to know <em>what to practise</em>, not just how you rank</li>
+          </ul>
+        </div>
+      </div>
+      <p>They answer different questions, and a serious player can reasonably carry both.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="fargo-rate-alternative.html">Compared with Fargo Rate</a>
+        <a class="btn btn--ghost" href="how-it-works.html">How the rating is calculated</a>
+      </div>
+{FARGO_DISCLAIMER}
+    </div>
+  </section>
+
+{CTA}
+"""
+
 
 FAQ_ITEMS = [
     ("Do I need a real pool table to use Runout Rank?",
@@ -840,9 +1259,11 @@ FAQ_ITEMS = [
      "into a 0&ndash;100 rating with a named tier, and seven out of ten clears the level. The result "
      "also shows how far your rating moved since your last test."),
     ("If the tests are random, how can two scores be compared?",
-     "The layouts are generated from a seed made of the level and the test number. That makes them "
-     "unpredictable to a player but perfectly reproducible for the app: Level 3 Test #12 is the "
-     "identical ten tables for everyone, on Android and iOS."),
+     "Because what is fixed is the level, not the tables. Each level defines the object ball count, "
+     "whether you get ball in hand, the minimum spacing between balls and the number of blockers, and "
+     "those constants are identical for every player on both platforms. Layouts are generated fresh "
+     "inside those rules, and ten tables in a row average out the luck &mdash; so seven out of ten at "
+     "Level 4 means the same thing whoever scored it."),
     ("Can I retry a table I misplayed?",
      "Not during a Rating Test &mdash; one attempt per table, no retries and no skips, which is what "
      "makes the score mean something. In free practice you can retry the same layout as often as you "
@@ -865,9 +1286,29 @@ FAQ_ITEMS = [
     ("Is my history safe when the app updates?",
      "Yes. Your existing tests, attempts and favourites are preserved across app updates. Because the "
      "data is local, uninstalling the app or clearing its data does remove it."),
+    ("How is this different from Fargo Rate?",
+     "Fargo Rate is a relative rating: it works out your number from results against other rated "
+     "players, which is why FargoRate treats 200 games as the minimum robustness for an established "
+     "rating, and why a weakly connected local scene can drift against the rest of the network. "
+     "Runout Rank is absolute &mdash; it measures you against fixed generated layouts, so one "
+     "ten-table session gives you a full rating and no opponent pool influences it. It is not a "
+     "handicap system and does not replace a league rating for match handicapping."),
+    ("How many games do I need before my Runout Rank rating means something?",
+     "Ten tables &mdash; one test, about an hour. There is no qualifying period and no provisional "
+     "phase, because the rating is computed from your run-outs against defined layouts rather than "
+     "from a history of results against other players."),
+    ("Does where I live affect my rating?",
+     "No. Every level&rsquo;s constraints are the same constants everywhere, and no opponents enter "
+     "the calculation. The one local variable is your "
+     "equipment: pocket cut, table size and cloth speed change how hard a run-out is, so take the "
+     "test on the table you actually play on and compare your own numbers over time."),
+    ("Can I use Runout Rank and a league rating together?",
+     "Yes, and that is the sensible thing to do if you play league. Keep the league rating for "
+     "handicapping matches, and use the run-out test to find which level is beating you and to "
+     "practise there &mdash; something a match-result rating cannot tell you."),
     ("Is Runout Rank the same on Android and iOS?",
-     "Yes. The test generator and the rating maths are shared code, pinned by the same golden-vector "
-     "tests on both platforms, so the phone you own has no effect on your rating."),
+     "Yes. The level definitions, the generator and the rating maths are shared code running on both "
+     "platforms, so the phone you own has no effect on your rating."),
 ]
 
 FAQ_BODY_ITEMS = "\n".join(
@@ -1027,66 +1468,134 @@ def markdown_to_html(md):
 
 
 PAGES = [
-    ("index.html",
-     "Runout Rank — Pool Skill Rating Test & Training App for Android and iOS",
-     "How good are you at pool, really? Take a ten-table run-out test on your own table, get a 0–100 "
-     "rating and a tier from Rookie to Master, then practise at the level that beats you. No account, "
-     "works offline.",
-     INDEX, [APP_SCHEMA, SITE_SCHEMA],
-     "pool skill test, billiards rating app, run-out test, pool training app, pool skill level, "
-     "billiards practice app, pool rating 0-100"),
-    ("how-it-works.html",
-     "How the Runout Rank rating works — ten tables, one attempt each",
-     "Ten randomly generated tables at one level, one attempt each, scored into a 0–100 pool rating "
-     "and a tier. Seeded so the same test number is the identical ten tables for every player.",
-     HOW, [breadcrumb_schema("How it works", "how-it-works.html")], None),
-    ("levels.html",
-     "The six levels — Rookie to Master | Runout Rank",
-     "Rookie, Regular, League, Competitor, Advanced, Master. What changes at each rung of the ladder — "
-     "ball count, ball in hand, packing and blockers — and why nothing is locked.",
-     LEVELS, [breadcrumb_schema("Levels", "levels.html")], None),
-    ("practice.html",
-     "Pool practice sessions and a training log that remembers | Runout Rank",
-     "Endless randomly generated practice layouts at the level you choose, one-tap logging, retry and "
-     "skip, favourites, and a complete training log of every table you have run.",
-     PRACTICE, [breadcrumb_schema("Practice", "practice.html")], None),
-    ("runout-pro.html",
-     "Runout Pro — your full rating history and CSV export | Runout Rank",
-     "Where you stand is free, permanently. Runout Pro adds how you got there: rating plotted over "
-     "every test, per-level progression, the full test log and CSV export.",
-     PRO, [breadcrumb_schema("Runout Pro", "runout-pro.html")], None),
-    ("pool-skill-level-test.html",
-     GUIDE_TITLE,
-     "What separates a pool skill test worth taking from a drill you happen to like: whole run-outs, "
-     "unpredictable layouts, seeded repeatability, one attempt per table, and what to do with the number.",
-     GUIDE,
-     [f"""{{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "{GUIDE_TITLE}",
-  "description": "What separates a pool skill test worth taking from a drill you happen to like.",
-  "image": "{SITE_URL}assets/img/og-image.png",
-  "author": {{"@type": "Organization", "name": "Runout Rank"}},
-  "publisher": {{"@type": "Organization", "name": "Runout Rank"}},
-  "datePublished": "{LASTMOD}",
-  "dateModified": "{LASTMOD}",
-  "mainEntityOfPage": "{SITE_URL}pool-skill-level-test.html"
-}}""", breadcrumb_schema("Pool skill level test", "pool-skill-level-test.html")],
-     "how to test pool skill level, pool skill test, billiards skill assessment, run-out drill, "
-     "pool rating system"),
-    ("faq.html",
-     "Runout Rank FAQ — the test, the rating, the levels and your data",
-     "Do you need a real table? An account? How is the rating calculated, how can random tests be "
-     "comparable, and what does Runout Pro add? Answers to the common questions.",
-     FAQ, [FAQ_SCHEMA, breadcrumb_schema("FAQ", "faq.html")], None),
+    dict(slug="index.html",
+         title="Runout Rank — An Absolute Pool Skill Rating Test for Android and iOS",
+         description="Get a real pool rating in one session, not in 200 league games. Runout Rank "
+                     "measures you against ten generated table layouts rather than against local "
+                     "opponents, so the 0–100 number means the same in every city. No league, no "
+                     "account, works offline.",
+         body=INDEX,
+         schema=[APP_SCHEMA, SITE_SCHEMA],
+         keywords="absolute pool rating, fargo rate alternative, pool skill test, billiards rating "
+                  "app, pool rating without a league, run-out test, pool training app"),
+
+    dict(slug="how-it-works.html",
+         title="How the Runout Rank rating works — ten tables, one attempt each",
+         description="Ten randomly generated tables at one level, one attempt each, scored into a "
+                     "0–100 absolute pool rating and a tier. Fresh layouts every test, fixed level "
+                     "constraints, so the number means the same thing in every city.",
+         body=HOW,
+         schema=[breadcrumb_schema("How it works", "how-it-works.html")]),
+
+    dict(slug="levels.html",
+         title="The six levels — Rookie to Master | Runout Rank",
+         description="Rookie, Regular, League, Competitor, Advanced, Master. What changes at each "
+                     "rung of the ladder — ball count, ball in hand, packing and blockers — and why "
+                     "nothing is locked.",
+         body=LEVELS,
+         schema=[breadcrumb_schema("Levels", "levels.html")]),
+
+    dict(slug="practice.html",
+         title="Pool practice sessions and a training log that remembers | Runout Rank",
+         description="Endless randomly generated practice layouts at the level you choose, one-tap "
+                     "logging, retry and skip, favourites, and a complete training log of every "
+                     "table you have run.",
+         body=PRACTICE,
+         schema=[breadcrumb_schema("Practice", "practice.html")]),
+
+    dict(slug="fargo-rate-alternative.html",
+         dated=True,
+         title=FARGO_ALT_TITLE + " | Runout Rank",
+         description="Fargo Rate needs 200 games before a rating is established, and a relative "
+                     "rating is anchored to the players around you. Runout Rank is an absolute pool "
+                     "rating from one ten-table session — compared side by side, fairly.",
+         body=FARGO_ALT,
+         schema=[article_schema(
+             FARGO_ALT_TITLE,
+             "Why a relative league rating takes 200 games to establish and shifts with your local "
+             "player pool, what an absolute run-out rating does instead, and which of the two you want.",
+             "fargo-rate-alternative.html", UPDATED, UPDATED),
+             breadcrumb_schema("Fargo Rate alternative", "fargo-rate-alternative.html")],
+         published=UPDATED,
+         keywords="fargo rate alternative, fargo rating alternative, pool rating app, absolute pool "
+                  "rating, fargo rate 200 games, established fargo rating, fargo rate accuracy"),
+
+    dict(slug="pool-rating-without-a-league.html",
+         dated=True,
+         title=NO_LEAGUE_TITLE + " | Runout Rank",
+         description="Every league rating asks for hundreds of matches against rated players before "
+                     "the number is real. Here is how a casual or solo player gets an honest 0–100 "
+                     "pool rating in one session on their own table.",
+         body=NO_LEAGUE,
+         schema=[article_schema(
+             NO_LEAGUE_TITLE,
+             "How a casual or solo player can get an honest pool rating in one session without "
+             "joining a league or playing 200 rated games.",
+             "pool-rating-without-a-league.html", UPDATED, UPDATED),
+             breadcrumb_schema("A rating without a league", "pool-rating-without-a-league.html")],
+         published=UPDATED,
+         keywords="pool rating without a league, how to get a pool rating, casual pool player "
+                  "rating, solo pool practice rating, get rated at pool, billiards skill rating"),
+
+    dict(slug="absolute-vs-relative-pool-rating.html",
+         dated=True,
+         title=ABSOLUTE_TITLE + " | Runout Rank",
+         description="Elo, Glicko and Fargo Rate are relative: every rating is a position in a "
+                     "network of other ratings, so volume and local connectivity both matter. What "
+                     "an absolute pool rating measures instead, and what each is good for.",
+         body=ABSOLUTE,
+         schema=[article_schema(
+             ABSOLUTE_TITLE,
+             "Why relative pool ratings depend on the players around you, what an absolute rating "
+             "measures instead, and which one answers which question.",
+             "absolute-vs-relative-pool-rating.html", UPDATED, UPDATED),
+             breadcrumb_schema("Absolute vs relative ratings", "absolute-vs-relative-pool-rating.html")],
+         published=UPDATED,
+         keywords="absolute vs relative pool rating, relative rating system, elo pool rating, "
+                  "regional fargo rating differences, pool rating explained"),
+
+    dict(slug="runout-pro.html",
+         title="Runout Pro — your full rating history and CSV export | Runout Rank",
+         description="Where you stand is free, permanently. Runout Pro adds how you got there: "
+                     "rating plotted over every test, per-level progression, the full test log and "
+                     "CSV export.",
+         body=PRO,
+         schema=[breadcrumb_schema("Runout Pro", "runout-pro.html")]),
+
+    dict(slug="pool-skill-level-test.html",
+         dated=True,
+         title=GUIDE_TITLE,
+         description="What separates a pool skill test worth taking from a drill you happen to like: "
+                     "whole run-outs, unpredictable layouts, defined difficulty, one attempt per "
+                     "table, and what to do with the number.",
+         body=GUIDE,
+         schema=[article_schema(
+             GUIDE_TITLE,
+             "What separates a pool skill test worth taking from a drill you happen to like.",
+             "pool-skill-level-test.html", FIRST_PUBLISHED, UPDATED),
+             breadcrumb_schema("Pool skill level test", "pool-skill-level-test.html")],
+         keywords="how to test pool skill level, pool skill test, billiards skill assessment, "
+                  "run-out drill, pool rating system"),
+
+    dict(slug="faq.html",
+         title="Runout Rank FAQ — the test, the rating, the levels and your data",
+         description="Do you need a real table? A league? How is the rating calculated, how does it "
+                     "differ from Fargo Rate, and what does Runout Pro add? Answers to the common "
+                     "questions.",
+         body=FAQ,
+         schema=[FAQ_SCHEMA, breadcrumb_schema("FAQ", "faq.html")]),
 ]
 
 
 def main():
     written = []
-    for slug, title, description, body, schema, keywords in PAGES:
+    for spec in PAGES:
+        slug = spec["slug"]
         with open(os.path.join(HERE, slug), "w", encoding="utf-8") as fh:
-            fh.write(page(slug, title, description, body, schema, keywords=keywords))
+            fh.write(page(slug, spec["title"], spec["description"], spec["body"],
+                          spec["schema"], keywords=spec.get("keywords"),
+                          published=spec.get("published"), updated=spec.get("updated"),
+                          dated=spec.get("dated", False)))
         written.append(slug)
 
     # Privacy policy is generated from Markdown so it can be kept in step with the app repo copy.
@@ -1108,9 +1617,13 @@ def main():
     written.append("404.html")
 
     # sitemap.xml — 404 is deliberately excluded.
-    urls = ["index.html", "how-it-works.html", "levels.html", "practice.html", "runout-pro.html",
+    urls = ["index.html", "how-it-works.html", "fargo-rate-alternative.html",
+            "pool-rating-without-a-league.html", "absolute-vs-relative-pool-rating.html",
+            "levels.html", "practice.html", "runout-pro.html",
             "pool-skill-level-test.html", "faq.html", "privacy-policy.html"]
-    priority = {"index.html": "1.0", "how-it-works.html": "0.9", "levels.html": "0.8",
+    priority = {"index.html": "1.0", "how-it-works.html": "0.9",
+                "fargo-rate-alternative.html": "0.9", "pool-rating-without-a-league.html": "0.9",
+                "absolute-vs-relative-pool-rating.html": "0.8", "levels.html": "0.8",
                 "practice.html": "0.8", "runout-pro.html": "0.7",
                 "pool-skill-level-test.html": "0.7", "faq.html": "0.6", "privacy-policy.html": "0.3"}
     entries = "\n".join(
@@ -1140,7 +1653,7 @@ Sitemap: {SITE_URL}sitemap.xml
         fh.write("""{
   "name": "Runout Rank",
   "short_name": "Runout Rank",
-  "description": "Pool skill rating test and training app for Android and iOS.",
+  "description": "Absolute pool skill rating test and training app for Android and iOS. A 0-100 rating from one ten-table session, with no league required.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#111413",

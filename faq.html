@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Runout Rank FAQ — the test, the rating, the levels and your data</title>
-  <meta name="description" content="Do you need a real table? An account? How is the rating calculated, how can random tests be comparable, and what does Runout Pro add? Answers to the common questions.">
+  <meta name="description" content="Do you need a real table? A league? How is the rating calculated, how does it differ from Fargo Rate, and what does Runout Pro add? Answers to the common questions.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#111413">
   <meta name="color-scheme" content="dark">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Runout Rank">
   <meta property="og:title" content="Runout Rank FAQ — the test, the rating, the levels and your data">
-  <meta property="og:description" content="Do you need a real table? An account? How is the rating calculated, how can random tests be comparable, and what does Runout Pro add? Answers to the common questions.">
+  <meta property="og:description" content="Do you need a real table? A league? How is the rating calculated, how does it differ from Fargo Rate, and what does Runout Pro add? Answers to the common questions.">
   <meta property="og:url" content="https://mylesieong.github.io/products/runout-rank/faq.html">
   <meta property="og:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
   <meta property="og:locale" content="en_GB">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Runout Rank FAQ — the test, the rating, the levels and your data">
-  <meta name="twitter:description" content="Do you need a real table? An account? How is the rating calculated, how can random tests be comparable, and what does Runout Pro add? Answers to the common questions.">
+  <meta name="twitter:description" content="Do you need a real table? A league? How is the rating calculated, how does it differ from Fargo Rate, and what does Runout Pro add? Answers to the common questions.">
   <meta name="twitter:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
   <script type="application/ld+json">
 {
@@ -51,7 +51,7 @@
     {
       "@type": "Question",
       "name": "If the tests are random, how can two scores be compared?",
-      "acceptedAnswer": {"@type": "Answer", "text": "The layouts are generated from a seed made of the level and the test number. That makes them unpredictable to a player but perfectly reproducible for the app: Level 3 Test #12 is the identical ten tables for everyone, on Android and iOS."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Because what is fixed is the level, not the tables. Each level defines the object ball count, whether you get ball in hand, the minimum spacing between balls and the number of blockers, and those constants are identical for every player on both platforms. Layouts are generated fresh inside those rules, and ten tables in a row average out the luck \u2014 so seven out of ten at Level 4 means the same thing whoever scored it."}
     },
     {
       "@type": "Question",
@@ -85,8 +85,28 @@
     },
     {
       "@type": "Question",
+      "name": "How is this different from Fargo Rate?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Fargo Rate is a relative rating: it works out your number from results against other rated players, which is why FargoRate treats 200 games as the minimum robustness for an established rating, and why a weakly connected local scene can drift against the rest of the network. Runout Rank is absolute \u2014 it measures you against fixed generated layouts, so one ten-table session gives you a full rating and no opponent pool influences it. It is not a handicap system and does not replace a league rating for match handicapping."}
+    },
+    {
+      "@type": "Question",
+      "name": "How many games do I need before my Runout Rank rating means something?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Ten tables \u2014 one test, about an hour. There is no qualifying period and no provisional phase, because the rating is computed from your run-outs against defined layouts rather than from a history of results against other players."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does where I live affect my rating?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. Every level&rsquo;s constraints are the same constants everywhere, and no opponents enter the calculation. The one local variable is your equipment: pocket cut, table size and cloth speed change how hard a run-out is, so take the test on the table you actually play on and compare your own numbers over time."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use Runout Rank and a league rating together?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, and that is the sensible thing to do if you play league. Keep the league rating for handicapping matches, and use the run-out test to find which level is beating you and to practise there \u2014 something a match-result rating cannot tell you."}
+    },
+    {
+      "@type": "Question",
       "name": "Is Runout Rank the same on Android and iOS?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The test generator and the rating maths are shared code, pinned by the same golden-vector tests on both platforms, so the phone you own has no effect on your rating."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The level definitions, the generator and the rating maths are shared code running on both platforms, so the phone you own has no effect on your rating."}
     }
   ]
 }
@@ -125,6 +145,7 @@
           <li><a href="how-it-works.html">How it works</a></li>
           <li><a href="levels.html">Levels</a></li>
           <li><a href="practice.html">Practice</a></li>
+          <li><a href="fargo-rate-alternative.html">vs Fargo Rate</a></li>
           <li><a href="runout-pro.html">Runout Pro</a></li>
           <li><a href="faq.html" aria-current="page">FAQ</a></li>
         </ul>
@@ -161,7 +182,7 @@
       </div>
       <div class="faq-item">
         <h3>If the tests are random, how can two scores be compared?</h3>
-        <p>The layouts are generated from a seed made of the level and the test number. That makes them unpredictable to a player but perfectly reproducible for the app: Level 3 Test #12 is the identical ten tables for everyone, on Android and iOS.</p>
+        <p>Because what is fixed is the level, not the tables. Each level defines the object ball count, whether you get ball in hand, the minimum spacing between balls and the number of blockers, and those constants are identical for every player on both platforms. Layouts are generated fresh inside those rules, and ten tables in a row average out the luck &mdash; so seven out of ten at Level 4 means the same thing whoever scored it.</p>
       </div>
       <div class="faq-item">
         <h3>Can I retry a table I misplayed?</h3>
@@ -188,8 +209,24 @@
         <p>Yes. Your existing tests, attempts and favourites are preserved across app updates. Because the data is local, uninstalling the app or clearing its data does remove it.</p>
       </div>
       <div class="faq-item">
+        <h3>How is this different from Fargo Rate?</h3>
+        <p>Fargo Rate is a relative rating: it works out your number from results against other rated players, which is why FargoRate treats 200 games as the minimum robustness for an established rating, and why a weakly connected local scene can drift against the rest of the network. Runout Rank is absolute &mdash; it measures you against fixed generated layouts, so one ten-table session gives you a full rating and no opponent pool influences it. It is not a handicap system and does not replace a league rating for match handicapping.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How many games do I need before my Runout Rank rating means something?</h3>
+        <p>Ten tables &mdash; one test, about an hour. There is no qualifying period and no provisional phase, because the rating is computed from your run-outs against defined layouts rather than from a history of results against other players.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does where I live affect my rating?</h3>
+        <p>No. Every level&rsquo;s constraints are the same constants everywhere, and no opponents enter the calculation. The one local variable is your equipment: pocket cut, table size and cloth speed change how hard a run-out is, so take the test on the table you actually play on and compare your own numbers over time.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I use Runout Rank and a league rating together?</h3>
+        <p>Yes, and that is the sensible thing to do if you play league. Keep the league rating for handicapping matches, and use the run-out test to find which level is beating you and to practise there &mdash; something a match-result rating cannot tell you.</p>
+      </div>
+      <div class="faq-item">
         <h3>Is Runout Rank the same on Android and iOS?</h3>
-        <p>Yes. The test generator and the rating maths are shared code, pinned by the same golden-vector tests on both platforms, so the phone you own has no effect on your rating.</p>
+        <p>Yes. The level definitions, the generator and the rating maths are shared code running on both platforms, so the phone you own has no effect on your rating.</p>
       </div>
       <p style="margin-top:28px">Still unsure how the number is produced?
       <a href="how-it-works.html">Read how the rating works &rarr;</a></p>
@@ -203,8 +240,8 @@
       <p class="lead" style="max-width:38rem;margin:0 auto 28px">Set the layouts up on the table you
       already play on. The app scores the run-outs and tells you which level to train at next.</p>
       <div class="store-links" style="justify-content:center">
-        <div class="store-link" aria-label="Coming soon to the App Store"><span>Coming soon</span><span>App Store</span></div>
-        <div class="store-link" aria-label="Coming soon to Google Play"><span>Coming soon</span><span>Google Play</span></div>
+        <a class="store-link" href="https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"><span>Get it on</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="In review for the App Store"><span>In review</span><span>App Store</span></div>
       </div>
     </div>
   </section>
@@ -224,8 +261,9 @@
         <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
       </g>
     </svg> Runout&nbsp;Rank</a>
-          <p style="margin-top:12px;max-width:24rem">A ten-table run-out test on your own pool table,
-          a 0&ndash;100 rating, and the level that beats you. No account, no server, no internet needed.</p>
+          <p style="margin-top:12px;max-width:24rem">An absolute pool rating from a ten-table run-out
+          test on your own table. A 0&ndash;100 number in one sitting &mdash; no league, no 200-game wait,
+          no account, no internet needed.</p>
         </div>
         <div>
           <h4>The app</h4>
@@ -237,8 +275,11 @@
           </ul>
         </div>
         <div>
-          <h4>More</h4>
+          <h4>Guides</h4>
           <ul>
+            <li><a href="fargo-rate-alternative.html">Fargo Rate alternative</a></li>
+            <li><a href="pool-rating-without-a-league.html">A rating without a league</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative ratings</a></li>
             <li><a href="pool-skill-level-test.html">Pool skill level test guide</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="privacy-policy.html">Privacy policy</a></li>
@@ -247,9 +288,13 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Runout Rank. Built for players, not for arcade pool.</span>
+        <span>&copy; 2026 Runout Rank. Written and built by Sai Ieong.</span>
         <span>Android &amp; iOS &middot; Dark mode only, like the app</span>
       </div>
+      <p class="disclaimer">Fargo Rate and FargoRate are trademarks of their respective owner.
+      Runout Rank is an independent app and is not affiliated with, endorsed by, or connected to
+      FargoRate, the BCA, the APA or any league operator. Comparisons on this site describe published
+      behaviour of those systems and are offered for the reader&rsquo;s own judgement.</p>
     </div>
   </footer>
 </body>

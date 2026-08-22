@@ -1,7 +1,7 @@
 {
   "name": "Runout Rank",
   "short_name": "Runout Rank",
-  "description": "Pool skill rating test and training app for Android and iOS.",
+  "description": "Absolute pool skill rating test and training app for Android and iOS. A 0-100 rating from one ten-table session, with no league required.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#111413",

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How the Runout Rank rating works — ten tables, one attempt each</title>
-  <meta name="description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 pool rating and a tier. Seeded so the same test number is the identical ten tables for every player.">
+  <meta name="description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 absolute pool rating and a tier. Fresh layouts every test, fixed level constraints, so the number means the same thing in every city.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#111413">
   <meta name="color-scheme" content="dark">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Runout Rank">
   <meta property="og:title" content="How the Runout Rank rating works — ten tables, one attempt each">
-  <meta property="og:description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 pool rating and a tier. Seeded so the same test number is the identical ten tables for every player.">
+  <meta property="og:description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 absolute pool rating and a tier. Fresh layouts every test, fixed level constraints, so the number means the same thing in every city.">
   <meta property="og:url" content="https://mylesieong.github.io/products/runout-rank/how-it-works.html">
   <meta property="og:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
   <meta property="og:locale" content="en_GB">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How the Runout Rank rating works — ten tables, one attempt each">
-  <meta name="twitter:description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 pool rating and a tier. Seeded so the same test number is the identical ten tables for every player.">
+  <meta name="twitter:description" content="Ten randomly generated tables at one level, one attempt each, scored into a 0–100 absolute pool rating and a tier. Fresh layouts every test, fixed level constraints, so the number means the same thing in every city.">
   <meta name="twitter:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
   <script type="application/ld+json">
 {
@@ -62,6 +62,7 @@
           <li><a href="how-it-works.html" aria-current="page">How it works</a></li>
           <li><a href="levels.html">Levels</a></li>
           <li><a href="practice.html">Practice</a></li>
+          <li><a href="fargo-rate-alternative.html">vs Fargo Rate</a></li>
           <li><a href="runout-pro.html">Runout Pro</a></li>
           <li><a href="faq.html">FAQ</a></li>
         </ul>
@@ -121,24 +122,38 @@
       </ul>
       <p>From that screen, practising at your edge level is one tap.</p>
 
-      <h2>Why the tests are random <em>and</em> comparable</h2>
-      <p>Every test is generated rather than picked from a fixed set, so there are no answers to
-      memorise in advance. But the generator is seeded by the level and the test number, which means
-      <strong>Level&nbsp;3 Test&nbsp;#12 is the identical ten tables for every player</strong>, on
-      Android and on iOS alike.</p>
-      <p>That is what lets you share a score. Send a friend the level and test number, they take the
-      same ten tables, and the two results are directly comparable &mdash; with no account, no server
-      and no leaderboard in between.</p>
+      <h2>Why random layouts still produce a comparable score</h2>
+      <p>Every test is generated fresh, so there are no answers to memorise and no drill you can
+      rehearse in advance. Two players never meet the same ten tables &mdash; and they do not need to.</p>
+      <p>What is fixed is the <strong>level</strong>. Ball count, whether you get ball in hand, the
+      minimum spacing between balls and the number of blockers are defined constants, identical for
+      everyone on both platforms. A Level&nbsp;4 test always asks a Level&nbsp;4 question. Ten tables
+      is enough for the difficulty to average out, which is why the test is ten and not one.</p>
+      <p>So the thing being measured is you against the level&rsquo;s constraints, not you against ten
+      particular tables. That is what makes one player&rsquo;s 58 mean the same as another&rsquo;s.</p>
+
+      <h2>Why the rating is absolute</h2>
+      <p>No opponent appears anywhere in that calculation. League systems such as Fargo Rate are
+      <em>relative</em> &mdash; your number is derived from results against other rated players, which
+      is why they need a large game history before the rating settles, and why a weakly connected
+      local scene can sit high or low against the rest of the network. Runout Rank compares you to a
+      fixed standard instead. The level constraints are the same everywhere, so the rating is the same
+      measurement everywhere, from the very first test.</p>
+      <p>The one local variable is your equipment. Pocket cut, table size and cloth speed change how
+      hard a run-out is, so take the test on the table you actually play on and compare your own
+      numbers over time.</p>
+      <p><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative pool ratings &rarr;</a></p>
 
       <h2>What the rating is not</h2>
       <p>It is a measurement of your run-out ability on generated layouts, taken under a no-retry rule.
       It is not a handicap system, not a governing-body rating, and it does not talk to any league
-      database. It is an honest number you can take yourself, on your own table, whenever you want a
-      fresh one.</p>
+      database. If you need a number to handicap a match, that is what a league rating is for &mdash;
+      see <a href="fargo-rate-alternative.html">how the two compare</a>. This is an honest number you
+      can take yourself, on your own table, whenever you want a fresh one.</p>
 
       <div class="btn-row" style="margin-top:36px">
         <a class="btn btn--primary" href="levels.html">See the six levels</a>
-        <a class="btn btn--ghost" href="faq.html">Read the FAQ</a>
+        <a class="btn btn--ghost" href="fargo-rate-alternative.html">Compared with Fargo Rate</a>
       </div>
     </div>
   </section>
@@ -150,8 +165,8 @@
       <p class="lead" style="max-width:38rem;margin:0 auto 28px">Set the layouts up on the table you
       already play on. The app scores the run-outs and tells you which level to train at next.</p>
       <div class="store-links" style="justify-content:center">
-        <div class="store-link" aria-label="Coming soon to the App Store"><span>Coming soon</span><span>App Store</span></div>
-        <div class="store-link" aria-label="Coming soon to Google Play"><span>Coming soon</span><span>Google Play</span></div>
+        <a class="store-link" href="https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"><span>Get it on</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="In review for the App Store"><span>In review</span><span>App Store</span></div>
       </div>
     </div>
   </section>
@@ -171,8 +186,9 @@
         <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
       </g>
     </svg> Runout&nbsp;Rank</a>
-          <p style="margin-top:12px;max-width:24rem">A ten-table run-out test on your own pool table,
-          a 0&ndash;100 rating, and the level that beats you. No account, no server, no internet needed.</p>
+          <p style="margin-top:12px;max-width:24rem">An absolute pool rating from a ten-table run-out
+          test on your own table. A 0&ndash;100 number in one sitting &mdash; no league, no 200-game wait,
+          no account, no internet needed.</p>
         </div>
         <div>
           <h4>The app</h4>
@@ -184,8 +200,11 @@
           </ul>
         </div>
         <div>
-          <h4>More</h4>
+          <h4>Guides</h4>
           <ul>
+            <li><a href="fargo-rate-alternative.html">Fargo Rate alternative</a></li>
+            <li><a href="pool-rating-without-a-league.html">A rating without a league</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">Absolute vs relative ratings</a></li>
             <li><a href="pool-skill-level-test.html">Pool skill level test guide</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="privacy-policy.html">Privacy policy</a></li>
@@ -194,9 +213,13 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Runout Rank. Built for players, not for arcade pool.</span>
+        <span>&copy; 2026 Runout Rank. Written and built by Sai Ieong.</span>
         <span>Android &amp; iOS &middot; Dark mode only, like the app</span>
       </div>
+      <p class="disclaimer">Fargo Rate and FargoRate are trademarks of their respective owner.
+      Runout Rank is an independent app and is not affiliated with, endorsed by, or connected to
+      FargoRate, the BCA, the APA or any league operator. Comparisons on this site describe published
+      behaviour of those systems and are offered for the reader&rsquo;s own judgement.</p>
     </div>
   </footer>
 </body>
