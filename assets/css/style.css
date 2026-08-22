@@ -463,6 +463,38 @@ td strong { color: var(--text); }
 .site-footer li { margin-bottom: 8px; }
 .site-footer a { color: var(--text-dim); }
 .site-footer a:hover { color: var(--primary); }
+.lang-switch {
+  border-top: 1px solid var(--outline);
+  padding-top: 20px;
+  margin-bottom: 24px;
+}
+.lang-switch ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 6px;
+}
+.lang-switch li { margin-bottom: 0; }
+.lang-switch a,
+.lang-switch span {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+.lang-switch a:hover {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--text-dim);
+  text-decoration: none;
+}
+.lang-switch span[aria-current] {
+  color: var(--primary);
+  background: var(--surface);
+  border-color: var(--primary-container);
+}
+
 .footer-bottom {
   border-top: 1px solid var(--outline);
   padding-top: 20px;

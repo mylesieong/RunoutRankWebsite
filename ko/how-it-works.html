@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Runout Rank 레이팅의 원리 — 열 판, 판마다 한 번</title>
+  <meta name="description" content="한 레벨에서 무작위로 생성된 열 판을 판마다 한 번씩 쳐서 0–100 절대 당구 레이팅과 등급으로 환산합니다. 테스트마다 새로운 배치, 고정된 레벨 제약 덕분에 그 숫자는 어느 도시에서나 같은 의미를 갖습니다.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#111413">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://mylesieong.github.io/products/runout-rank/ko/how-it-works.html">
+  <link rel="alternate" hreflang="en" href="https://mylesieong.github.io/products/runout-rank/how-it-works.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://mylesieong.github.io/products/runout-rank/zh/how-it-works.html">
+  <link rel="alternate" hreflang="vi" href="https://mylesieong.github.io/products/runout-rank/vi/how-it-works.html">
+  <link rel="alternate" hreflang="pt-PT" href="https://mylesieong.github.io/products/runout-rank/pt/how-it-works.html">
+  <link rel="alternate" hreflang="ko" href="https://mylesieong.github.io/products/runout-rank/ko/how-it-works.html">
+  <link rel="alternate" hreflang="x-default" href="https://mylesieong.github.io/products/runout-rank/how-it-works.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Runout Rank">
+  <meta property="og:title" content="Runout Rank 레이팅의 원리 — 열 판, 판마다 한 번">
+  <meta property="og:description" content="한 레벨에서 무작위로 생성된 열 판을 판마다 한 번씩 쳐서 0–100 절대 당구 레이팅과 등급으로 환산합니다. 테스트마다 새로운 배치, 고정된 레벨 제약 덕분에 그 숫자는 어느 도시에서나 같은 의미를 갖습니다.">
+  <meta property="og:url" content="https://mylesieong.github.io/products/runout-rank/ko/how-it-works.html">
+  <meta property="og:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Runout Rank — 당신의 당구 실력, 정말 어느 정도일까요?">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Runout Rank 레이팅의 원리 — 열 판, 판마다 한 번">
+  <meta name="twitter:description" content="한 레벨에서 무작위로 생성된 열 판을 판마다 한 번씩 쳐서 0–100 절대 당구 레이팅과 등급으로 환산합니다. 테스트마다 새로운 배치, 고정된 레벨 제약 덕분에 그 숫자는 어느 도시에서나 같은 의미를 갖습니다.">
+  <meta name="twitter:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "\ud648", "item": "https://mylesieong.github.io/products/runout-rank/ko/"},
+    {"@type": "ListItem", "position": 2, "name": "\uce21\uc815 \ubc29\uc2dd", "item": "https://mylesieong.github.io/products/runout-rank/ko/how-it-works.html"}
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg>
+        Runout&nbsp;Rank
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="how-it-works.html" aria-current="page">측정 방식</a></li>
+          <li><a href="levels.html">레벨</a></li>
+          <li><a href="practice.html">연습</a></li>
+          <li><a href="fargo-rate-alternative.html">Fargo Rate 비교</a></li>
+          <li><a href="runout-pro.html">Runout Pro</a></li>
+          <li><a href="faq.html">자주 묻는 질문</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <ol>
+          <li><a href="index.html">홈</a></li>
+          <li>측정 방식</li>
+        </ol>
+      </nav>
+      <h1>Runout Rank 레이팅은 어떻게 계산되는가</h1>
+      <p class="lead">생성된 열 개의 배치, 판마다 단 한 번의 시도, 그것이 0&ndash;100 레이팅과 등급 명칭으로
+      환산됩니다 &mdash; 그리고 다음에 무엇을 해야 하는지에 대한 분명한 지시까지.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>1. 레벨을 고르고 테스트를 시작합니다</h2>
+      <p>레이팅 테스트는 한 레벨에서 치르는 열 판입니다. 레벨은 당신이 고릅니다. 앱이 하나를 제안하지만
+      잠긴 레벨은 없으므로, 잘 치는 사람은 Rookie부터 갈아 올라갈 필요 없이 바로 Competitor에서 시작해도
+      됩니다. 레이팅을 받아 본 적이 없다면 홈 화면에서 탭 한 번이면 테스트가 시작됩니다 &mdash; 미리
+      설정할 것은 없습니다.</p>
+      <p>몸을 좀 풀고 싶다면 연습용 배치를 한 판만 생성해 보고 테스트는 나중에 치러도 됩니다.</p>
+
+      <h2>2. 각 배치를 실제 테이블에 놓습니다</h2>
+      <p>모든 판은 수구, 목적구, 그리고 방해구가 제자리에 놓인 채 위에서 내려다본 그림으로 그려집니다.
+      방해구는 넣는 순서의 일부로 읽히는 일이 없도록 일부러 흐릿하게, 번호 없이 그립니다. 보이는 대로,
+      당신이 늘 치던 그 테이블 위에 놓으면 됩니다. 그림은 한 번의 시도가 끝날 때까지 화면에 남아 있으므로
+      배치가 흐트러져도 다시 세울 수 있습니다.</p>
+
+      <h2>3. 한 번 치고, 한 번 기록합니다</h2>
+      <p>런아웃하거나, 못 하거나. 탭 한 번이면 결과가 기록되고 다음 판으로 넘어갑니다. 상단에는 열 판 중
+      몇 번째인지가 항상 표시되고, 판 위쪽의 띠는 이미 친 판들 중 어느 것이 런아웃이었고 어느 것이
+      실패였는지를 보여 줍니다.</p>
+      <p><strong>판마다 정확히 한 번의 시도. 다시 치기도, 건너뛰기도 없습니다.</strong> 마지막에 나오는
+      숫자가 값어치를 갖는 이유가 바로 그 제약입니다.</p>
+      <div class="note">중간에 방해를 받았나요? 테스트를 나갔다가 나중에 돌아오세요 &mdash; 멈췄던 바로 그
+      판에서 이어집니다. 일부러 그만두려 하면 먼저 확인을 요청하고, 끝내지 못한 회차는 채점할 수 없다는
+      점을 알려 줍니다.</div>
+
+      <h2>4. 결과를 읽습니다</h2>
+      <p>열 번째 판이 기록되는 순간 다음을 받습니다.</p>
+      <ul>
+        <li><strong>10점 만점의 점수</strong> &mdash; 열 판 중 몇 판을 런아웃했는지.</li>
+        <li><strong>0&ndash;100 레이팅</strong>과 그에 해당하는 <strong>등급</strong>.</li>
+        <li><strong>통과 여부.</strong> 10판 중 7판이면 그 레벨을 통과합니다.</li>
+        <li><strong>레이팅 변화량</strong> &mdash; 지난 테스트 이후 숫자가 얼마나 움직였는지.</li>
+        <li><strong>당신의 한계 레벨</strong> &mdash; 지금 당신을 막고 있는 레벨과, 그에 대해 무엇을 해야
+        하는지에 대한 쉬운 설명.</li>
+      </ul>
+      <p>그 화면에서 한계 레벨의 연습을 시작하는 것은 탭 한 번입니다.</p>
+
+      <h2>배치가 무작위인데 어떻게 점수를 비교할 수 있나</h2>
+      <p>모든 테스트는 새로 생성되므로 외울 답도, 미리 연습해 둘 드릴도 없습니다. 두 사람이 똑같은 열 판을
+      만나는 일은 없습니다 &mdash; 그럴 필요도 없고요.</p>
+      <p>고정된 것은 <strong>레벨</strong>입니다. 공의 개수, 프리볼 여부, 공 사이의 최소 간격, 방해구의
+      수는 모두 정의된 상수이며 두 플랫폼의 모든 사용자에게 동일합니다. Level&nbsp;4 테스트는 언제나
+      Level&nbsp;4의 질문을 던집니다. 열 판이면 난이도의 기복이 상쇄되기에 충분하고, 그래서 테스트가 한
+      판이 아니라 열 판인 것입니다.</p>
+      <p>따라서 측정되는 것은 그 레벨의 제약에 맞선 당신이지, 특정한 열 판에 맞선 당신이 아닙니다. 한
+      사람의 58점이 다른 사람의 58점과 같은 의미를 갖는 이유가 바로 이것입니다.</p>
+
+      <h2>이 레이팅이 절대적인 이유</h2>
+      <p>그 계산 어디에도 상대는 등장하지 않습니다. Fargo Rate 같은 리그 시스템은 <em>상대적</em>입니다
+      &mdash; 당신의 숫자가 이미 레이팅을 가진 다른 사람들과의 결과에서 도출되며, 그래서 레이팅이 안정되기까지
+      많은 전적이 필요하고, 느슨하게 연결된 지역 판이 네트워크의 나머지에 비해 높거나 낮게 자리 잡을 수 있는
+      것입니다. Runout Rank는 대신 고정된 기준과 당신을 비교합니다. 레벨의 제약은 어디서나 같으므로, 이
+      레이팅은 첫 테스트부터 어디서나 동일한 측정입니다.</p>
+      <p>유일한 지역 변수는 당신의 장비입니다. 포켓을 깎은 형태, 테이블 크기, 천의 빠르기는 런아웃의 난이도를
+      바꾸므로, 실제로 치는 그 테이블에서 테스트하고 자신의 숫자를 시간에 따라 비교하세요.</p>
+      <p><a href="absolute-vs-relative-pool-rating.html">절대 레이팅과 상대 레이팅 &rarr;</a></p>
+
+      <h2>이 레이팅이 아닌 것</h2>
+      <p>이것은 다시 치기 금지 규칙 아래에서, 생성된 배치에 대한 당신의 런아웃 능력을 측정한 값입니다.
+      핸디캡 시스템이 아니고, 협회 공인 레이팅도 아니며, 어떤 리그 데이터베이스와도 연동되지 않습니다.
+      경기에 핸디를 매길 숫자가 필요하다면 그것이 리그 레이팅의 용도입니다 &mdash;
+      <a href="fargo-rate-alternative.html">둘을 비교한 글</a>을 보세요. 이것은 당신이 자신의 테이블에서,
+      새 숫자가 필요할 때마다 직접 뽑을 수 있는 정직한 숫자입니다.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="levels.html">여섯 레벨 보기</a>
+        <a class="btn btn--ghost" href="fargo-rate-alternative.html">Fargo Rate와 비교</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta band">
+    <div class="container">
+      <p class="eyebrow">당신의 숫자를 받으세요</p>
+      <h2>열 판. 판마다 단 한 번. 정직한 레이팅 하나.</h2>
+      <p class="lead" style="max-width:38rem;margin:0 auto 28px">늘 치던 그 테이블에 배치를 그대로 놓으세요.
+      앱이 런아웃을 채점하고, 다음에 어느 레벨에서 훈련해야 하는지 알려 줍니다.</p>
+      <div class="store-links" style="justify-content:center">
+        <a class="store-link" href="https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"><span>다운로드</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="App Store 심사 중"><span>심사 중</span><span>App Store</span></div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg> Runout&nbsp;Rank</a>
+          <p style="margin-top:12px;max-width:24rem">당신이 늘 치는 그 테이블에서 열 판 런아웃 테스트를 치르고 절대 당구 레이팅을 받으세요. 한 번 앉은 자리에서 0&ndash;100 점수가 나옵니다 &mdash; 리그도, 200경기의 기다림도, 계정도, 인터넷도 필요 없습니다.</p>
+        </div>
+        <div>
+          <h4>앱</h4>
+          <ul>
+            <li><a href="how-it-works.html">측정 방식</a></li>
+            <li><a href="levels.html">여섯 개의 레벨</a></li>
+            <li><a href="practice.html">연습과 훈련 기록</a></li>
+            <li><a href="runout-pro.html">Runout Pro</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>가이드</h4>
+          <ul>
+            <li><a href="fargo-rate-alternative.html">Fargo Rate 대안</a></li>
+            <li><a href="pool-rating-without-a-league.html">리그 없이 받는 레이팅</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">절대 레이팅과 상대 레이팅</a></li>
+            <li><a href="pool-skill-level-test.html">당구 실력 측정 가이드</a></li>
+            <li><a href="faq.html">자주 묻는 질문</a></li>
+            <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
+            <li><a href="../sitemap.xml">사이트맵</a></li>
+          </ul>
+        </div>
+      </div>
+      <nav class="lang-switch" aria-label="언어">
+        <h4>언어</h4>
+        <ul>
+          <li><a href="../how-it-works.html" hreflang="en" lang="en">English</a></li>
+          <li><a href="../zh/how-it-works.html" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+          <li><a href="../vi/how-it-works.html" hreflang="vi" lang="vi">Tiếng Việt</a></li>
+          <li><a href="../pt/how-it-works.html" hreflang="pt-PT" lang="pt-PT">Português</a></li>
+          <li><span aria-current="true" lang="ko">한국어</span></li>
+        </ul>
+      </nav>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Runout Rank. Sai Ieong이(가) 쓰고 만들었습니다.</span>
+        <span>안드로이드 &amp; iOS &middot; 앱과 마찬가지로 다크 모드 전용</span>
+      </div>
+      <p class="disclaimer">Fargo Rate와 FargoRate는 각 소유자의 상표입니다. Runout Rank는 독립적인 앱이며 FargoRate, BCA, APA 또는 어떤 리그 운영 주체와도 제휴, 보증, 연관 관계가 없습니다. 이 사이트의 비교는 해당 시스템들이 공개한 동작 방식을 설명한 것이며, 판단은 읽는 분의 몫으로 남겨 둡니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

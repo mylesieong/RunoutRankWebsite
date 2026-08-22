@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chỉ số bi-a tuyệt đối và tương đối: vì sao thành phố của bạn làm thay đổi con số | Runout Rank</title>
+  <meta name="description" content="Elo, Glicko và Fargo Rate đều là tương đối: mỗi chỉ số là một vị trí trong mạng lưới các chỉ số khác, nên cả số lượng ván đấu lẫn mức độ kết nối địa phương đều quan trọng. Một chỉ số bi-a tuyệt đối đo gì thay vào đó, và mỗi loại tốt cho việc gì.">
+  <meta name="keywords" content="chỉ số bi-a tuyệt đối và tương đối, hệ thống chỉ số tương đối, chỉ số elo bi-a, chênh lệch chỉ số fargo theo vùng, giải thích chỉ số bi-a">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#111413">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="en" href="https://mylesieong.github.io/products/runout-rank/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://mylesieong.github.io/products/runout-rank/zh/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="vi" href="https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="pt-PT" href="https://mylesieong.github.io/products/runout-rank/pt/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="ko" href="https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="x-default" href="https://mylesieong.github.io/products/runout-rank/absolute-vs-relative-pool-rating.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Runout Rank">
+  <meta property="og:title" content="Chỉ số bi-a tuyệt đối và tương đối: vì sao thành phố của bạn làm thay đổi con số | Runout Rank">
+  <meta property="og:description" content="Elo, Glicko và Fargo Rate đều là tương đối: mỗi chỉ số là một vị trí trong mạng lưới các chỉ số khác, nên cả số lượng ván đấu lẫn mức độ kết nối địa phương đều quan trọng. Một chỉ số bi-a tuyệt đối đo gì thay vào đó, và mỗi loại tốt cho việc gì.">
+  <meta property="og:url" content="https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html">
+  <meta property="og:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Runout Rank — trình độ bi-a thật sự của bạn tới đâu?">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chỉ số bi-a tuyệt đối và tương đối: vì sao thành phố của bạn làm thay đổi con số | Runout Rank">
+  <meta name="twitter:description" content="Elo, Glicko và Fargo Rate đều là tương đối: mỗi chỉ số là một vị trí trong mạng lưới các chỉ số khác, nên cả số lượng ván đấu lẫn mức độ kết nối địa phương đều quan trọng. Một chỉ số bi-a tuyệt đối đo gì thay vào đó, và mỗi loại tốt cho việc gì.">
+  <meta name="twitter:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <meta name="author" content="Sai Ieong">
+  <meta name="date" content="2026-08-22">
+  <meta name="last-modified" content="2026-08-22">
+  <meta property="article:author" content="Sai Ieong">
+  <meta property="article:published_time" content="2026-08-22">
+  <meta property="article:modified_time" content="2026-08-22">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Ch\u1ec9 s\u1ed1 bi-a tuy\u1ec7t \u0111\u1ed1i v\u00e0 t\u01b0\u01a1ng \u0111\u1ed1i: v\u00ec sao th\u00e0nh ph\u1ed1 c\u1ee7a b\u1ea1n l\u00e0m thay \u0111\u1ed5i con s\u1ed1",
+  "description": "V\u00ec sao ch\u1ec9 s\u1ed1 bi-a t\u01b0\u01a1ng \u0111\u1ed1i ph\u1ee5 thu\u1ed9c v\u00e0o nh\u1eefng ng\u01b0\u1eddi quanh b\u1ea1n, m\u1ed9t ch\u1ec9 s\u1ed1 tuy\u1ec7t \u0111\u1ed1i \u0111o g\u00ec thay v\u00e0o \u0111\u00f3, v\u00e0 lo\u1ea1i n\u00e0o tr\u1ea3 l\u1eddi c\u00e2u h\u1ecfi n\u00e0o.",
+  "image": "https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png",
+  "author": {
+      "@type": "Person",
+      "name": "Sai Ieong",
+      "jobTitle": "Ng\u01b0\u1eddi t\u1ea1o ra Runout Rank",
+      "url": "https://mylesieong.github.io/products/runout-rank/index.html"
+    },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Runout Rank",
+    "url": "https://mylesieong.github.io/products/runout-rank/"
+  },
+  "datePublished": "2026-08-22",
+  "dateModified": "2026-08-22",
+  "inLanguage": "vi",
+  "mainEntityOfPage": "https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Trang ch\u1ee7", "item": "https://mylesieong.github.io/products/runout-rank/vi/"},
+    {"@type": "ListItem", "position": 2, "name": "Ch\u1ec9 s\u1ed1 tuy\u1ec7t \u0111\u1ed1i v\u00e0 t\u01b0\u01a1ng \u0111\u1ed1i", "item": "https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html"}
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua, vào nội dung chính</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg>
+        Runout&nbsp;Rank
+      </a>
+      <nav class="site-nav" aria-label="Điều hướng chính">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="how-it-works.html">Cách hoạt động</a></li>
+          <li><a href="levels.html">Các cấp độ</a></li>
+          <li><a href="practice.html">Luyện tập</a></li>
+          <li><a href="fargo-rate-alternative.html">So với Fargo Rate</a></li>
+          <li><a href="runout-pro.html">Runout Pro</a></li>
+          <li><a href="faq.html">Hỏi đáp</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn phân cấp">
+        <ol>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li>Chỉ số tuyệt đối và tương đối</li>
+        </ol>
+      </nav>
+      <h1>Chỉ số bi-a tuyệt đối và tương đối</h1>
+      <p class="lead">Hai người chơi có trình độ giống hệt nhau, một người ở thành phố mạnh và một người ở nơi
+      trầm lắng, có thể mang những chỉ số tương đối khác nhau suốt nhiều năm. Đó không phải lỗi của phép toán
+      &mdash; đó chính là ý nghĩa của chữ &ldquo;tương đối&rdquo;. Đây là điểm khác biệt, và mỗi loại chỉ số
+      tốt cho việc gì.</p>
+      <p class="byline">
+        Tác giả: <span class="byline-author">Sai Ieong</span>,
+        Người tạo ra Runout Rank <span aria-hidden="true">&middot;</span>
+        Đăng ngày <time datetime="2026-08-22">22 tháng 8 2026</time>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>Chỉ số tương đối là gì</h2>
+      <p>Một chỉ số tương đối &mdash; Elo, Glicko, Fargo Rate và phần còn lại của họ nhà này &mdash; không có
+      khái niệm về một chuẩn tuyệt đối. Nó chỉ biết các kết quả: bạn thắng họ, họ thắng người khác. Từ một
+      mạng lưới đủ lớn các kết quả đó, hệ thống tìm ra bộ con số giải thích tốt nhất những gì đã xảy ra. Chưa
+      từng có ai được đo trực tiếp; mọi chỉ số đều là một vị trí trong mạng lưới các chỉ số khác.</p>
+      <p>Đó là một thiết kế thanh lịch và nó hoạt động tốt đến đáng kinh ngạc khi mạng lưới dày đặc. Nó cũng
+      kéo theo hai hệ quả mà không phép toán khéo léo nào loại bỏ được.</p>
+
+      <h2>Hệ quả thứ nhất: nó cần rất nhiều ván đấu</h2>
+      <p>Một kết quả là một bit bằng chứng, và một bit thì rất ít. Nên hệ thống cần số lượng thì mới tách được
+      bạn khỏi may rủi &mdash; đó là lý do FargoRate dùng thước đo độ vững và xem 200 ván là mức tối thiểu để
+      gọi một chỉ số là đã xác lập, đồng thời trộn một chỉ số khởi đầu vào con số cho tới khi bạn đạt mốc đó.
+      Cho tới khi bạn trả xong cái giá ấy bằng các ván đấu, chỉ số của bạn một phần vẫn là phỏng đoán về bạn.</p>
+
+      <h2>Hệ quả thứ hai: nó được neo vào những người quanh bạn</h2>
+      <p>Vì mọi chỉ số đều được định nghĩa dựa trên các chỉ số khác, một nhóm người chơi chỉ khớp đúng với phần
+      còn lại của thế giới nếu có đủ ván đấu nối họ với thế giới đó. Nơi kết nối mỏng &mdash; một khu vực biệt
+      lập, một giải đấu mới, một cộng đồng mà người chơi hiếm khi đi đánh giải mở &mdash; cả nhóm có thể ổn
+      định ở một mức không tương ứng với chính những con số đó ở nơi khác. FargoRate mô tả đúng trường hợp
+      này, hai nhóm gần như biệt lập với một nhóm được chấm cao hơn so với nhóm kia, là một vấn đề nan giải,
+      và lưu ý rằng các ván đấu với đối thủ đã xác lập chỉ số có giá trị hơn cũng chính vì lý do đó.</p>
+      <p>Phiên bản thực tế dành cho người chơi: nếu thành phố của bạn dày đặc người chơi giỏi, hoặc gần như
+      không kết nối với cộng đồng đã có chỉ số rộng hơn, thì con số của bạn một phần là lời phát biểu về môi
+      trường quanh bạn. Hai người cùng mặt bằng ở hai cộng đồng khác nhau không nhất thiết cho ra cùng một con
+      số, và cả hai đều chẳng thể làm gì ngoài việc chơi thêm nhiều ván với người ngoài.</p>
+
+      <h2>Chỉ số tuyệt đối là gì</h2>
+      <p>Một chỉ số tuyệt đối đo thành tích so với một chuẩn cố định thay vì so với con người. Điểm chấp trong
+      golf vận hành như vậy so với par. Điền kinh vận hành như vậy so với đồng hồ bấm giờ. Chiếc đồng hồ bấm
+      giờ không quan tâm còn ai khác trên đường chạy, và 10,4 giây ở Manila cũng là 10,4 giây ở Manchester.</p>
+      <p>Bi-a theo truyền thống không có thứ như vậy, bởi bi-a thiếu một chiếc đồng hồ hiển nhiên. Runout Rank
+      cung cấp thứ tương đương: một bộ thế bi đã định nghĩa và một câu hỏi &mdash; bạn có dọn sạch được không?
+      Mười ván ở một cấp độ, mỗi ván một lần, không đánh lại và không bỏ qua. Con số cho ra được tính hoàn
+      toàn từ kết quả của chính bạn trước các thế bi đó.</p>
+      <p>Vậy nên không có nhóm đối thủ nào để mạnh hay yếu, không có gì để trôi dạt theo, và không có số ván
+      tối thiểu nào trước khi phép đo có hiệu lực. Bạn có chỉ số của mình ngay khi kết thúc buổi đầu tiên, và
+      nó mang cùng ý nghĩa ở bất cứ đâu.</p>
+
+      <h2>Làm sao một chuẩn cố định tránh được việc trở thành bài kiểm tra trí nhớ</h2>
+      <p>Phản biện hiển nhiên: một bộ thế bi cố định sẽ thôi đo kỹ năng ngay khi bạn đã chơi nó vài lần, vì khi
+      đó bạn đang nhớ lại lời giải chứ không phải đi tìm nó.</p>
+      <p>Runout Rank tránh điều đó bằng cách cố định <em>độ khó</em> chứ không cố định các ván. Một cấp độ là
+      một bộ hằng số được công bố &mdash; số bi mục tiêu, có đặt bi cái tự do hay không, khoảng cách tối thiểu,
+      bi cản &mdash; và thế bi được tạo mới bên trong những quy tắc đó mỗi lần. Bạn không bao giờ thấy cùng
+      một ván hai lần, và mọi ván đều đặt ra cùng một câu hỏi. Mười ván liên tiếp sẽ san đều phần may rủi còn
+      lại.</p>
+
+      <h2>Điều một chỉ số tuyệt đối không làm được</h2>
+      <p>Nó không phải hệ thống chấp điểm, và không nên được dùng như vậy. Một chỉ số tương đối tồn tại để dự
+      đoán một trận đấu giữa hai người cụ thể, và nó làm việc đó tốt hơn hẳn bất kỳ phép đo tuyệt đối nào
+      &mdash; bởi kết quả các trận đấu chính là thứ nó được dựng nên từ đó.</p>
+      <p>Một chỉ số tuyệt đối cũng có biến số của riêng nó cần thành thật: thiết bị. Kiểu cắt lỗ, kích thước
+      bàn và tốc độ mặt nỉ đều làm thay đổi độ khó của một lượt dọn bàn, nên một chỉ số lấy trên bàn chín feet
+      lỗ hẹp là một phép đo khác với chỉ số lấy trên bàn nhỏ trong quán. Hãy cố định điều kiện của bạn, làm bài
+      kiểm tra trên chiếc bàn bạn thi đấu, và so sánh các con số của riêng bạn theo thời gian.</p>
+
+      <h2>Bạn muốn loại nào?</h2>
+      <div class="compare" style="margin:24px 0">
+        <div class="card">
+          <h3>Dùng chỉ số tương đối khi</h3>
+          <ul class="ticks">
+            <li>Bạn cần một mức chấp cho một trận đấu hoặc một nhánh giải</li>
+            <li>Giải đấu của bạn yêu cầu phải có</li>
+            <li>Bạn vốn đã chơi đủ nhiều ván tính điểm để giữ nó luôn vững</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Dùng chỉ số tuyệt đối khi</h3>
+          <ul class="ticks ticks--gold">
+            <li>Bạn muốn biết mình đang ở đâu mà không phải chơi trọn một mùa trước đã</li>
+            <li>Bạn luyện tập một mình, đi lại nhiều, hoặc chuyển giữa các cộng đồng</li>
+            <li>Bạn muốn biết <em>nên luyện gì</em>, chứ không chỉ mình xếp thứ mấy</li>
+          </ul>
+        </div>
+      </div>
+      <p>Chúng trả lời những câu hỏi khác nhau, và một người chơi nghiêm túc hoàn toàn có thể mang cả hai.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="fargo-rate-alternative.html">So sánh với Fargo Rate</a>
+        <a class="btn btn--ghost" href="how-it-works.html">Chỉ số được tính thế nào</a>
+      </div>
+      <p class="disclaimer">Runout Rank là ứng dụng độc lập, không trực thuộc, không được
+      chứng thực bởi và không có liên hệ nào với FargoRate. Mọi điều nói ở đây về Fargo Rate đều lấy từ
+      <a href="https://www.fargorate.com/" rel="nofollow">tài liệu do chính FargoRate công bố</a>
+      và được mô tả công bằng hết mức chúng tôi có thể; đó là một hệ thống tốt, và trang này chỉ bàn về việc
+      thiết kế của nó phù hợp và không phù hợp với kiểu người chơi nào.</p>
+    </div>
+  </section>
+
+  <section class="cta band">
+    <div class="container">
+      <p class="eyebrow">Nhận con số của bạn</p>
+      <h2>Mười ván. Mỗi ván một lần. Một chỉ số trung thực.</h2>
+      <p class="lead" style="max-width:38rem;margin:0 auto 28px">Hãy sắp các thế bi lên chính chiếc bàn
+      bạn vẫn chơi. Ứng dụng chấm điểm các lượt dọn bàn và cho bạn biết nên luyện ở cấp độ nào tiếp theo.</p>
+      <div class="store-links" style="justify-content:center">
+        <a class="store-link" href="https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"><span>Tải trên</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="Đang chờ duyệt trên App Store"><span>Đang duyệt</span><span>App Store</span></div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg> Runout&nbsp;Rank</a>
+          <p style="margin-top:12px;max-width:24rem">Một chỉ số bi-a tuyệt đối, có được từ bài kiểm tra dọn bàn mười ván ngay trên bàn của bạn. Một con số 0&ndash;100 chỉ trong một buổi &mdash; không cần giải đấu, không phải chờ 200 ván, không cần tài khoản, không cần Internet.</p>
+        </div>
+        <div>
+          <h4>Ứng dụng</h4>
+          <ul>
+            <li><a href="how-it-works.html">Cách hoạt động</a></li>
+            <li><a href="levels.html">Sáu cấp độ</a></li>
+            <li><a href="practice.html">Luyện tập &amp; nhật ký</a></li>
+            <li><a href="runout-pro.html">Runout Pro</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Bài hướng dẫn</h4>
+          <ul>
+            <li><a href="fargo-rate-alternative.html">Giải pháp thay thế Fargo Rate</a></li>
+            <li><a href="pool-rating-without-a-league.html">Có chỉ số mà không cần giải đấu</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">Chỉ số tuyệt đối và tương đối</a></li>
+            <li><a href="pool-skill-level-test.html">Hướng dẫn kiểm tra trình độ bi-a</a></li>
+            <li><a href="faq.html">Hỏi đáp</a></li>
+            <li><a href="privacy-policy.html">Chính sách quyền riêng tư</a></li>
+            <li><a href="../sitemap.xml">Sơ đồ trang</a></li>
+          </ul>
+        </div>
+      </div>
+      <nav class="lang-switch" aria-label="Ngôn ngữ">
+        <h4>Ngôn ngữ</h4>
+        <ul>
+          <li><a href="../absolute-vs-relative-pool-rating.html" hreflang="en" lang="en">English</a></li>
+          <li><a href="../zh/absolute-vs-relative-pool-rating.html" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+          <li><span aria-current="true" lang="vi">Tiếng Việt</span></li>
+          <li><a href="../pt/absolute-vs-relative-pool-rating.html" hreflang="pt-PT" lang="pt-PT">Português</a></li>
+          <li><a href="../ko/absolute-vs-relative-pool-rating.html" hreflang="ko" lang="ko">한국어</a></li>
+        </ul>
+      </nav>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Runout Rank. Do Sai Ieong viết và xây dựng.</span>
+        <span>Android &amp; iOS &middot; Chỉ có chế độ tối, giống như ứng dụng</span>
+      </div>
+      <p class="disclaimer">Fargo Rate và FargoRate là thương hiệu của chủ sở hữu tương ứng. Runout Rank là một ứng dụng độc lập, không trực thuộc, không được chứng thực bởi và không có liên hệ nào với FargoRate, BCA, APA hay bất kỳ đơn vị tổ chức giải đấu nào. Các so sánh trên trang này mô tả cách vận hành đã được công bố của những hệ thống đó, và được đưa ra để bạn đọc tự đánh giá.</p>
+    </div>
+  </footer>
+</body>
+</html>

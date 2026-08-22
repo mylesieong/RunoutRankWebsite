@@ -24,15 +24,19 @@ site and the app read as the same product.
 | `faq.html` | FAQ (also emitted as `FAQPage` structured data) |
 | `privacy-policy.html` | Generated from `content/privacy-policy.md` |
 | `404.html` | Not-found page (`noindex`) |
+| `zh/`, `vi/`, `pt/`, `ko/` | The same twelve pages in Simplified Chinese, Vietnamese, European Portuguese and Korean |
 | `sitemap.xml`, `robots.txt`, `site.webmanifest` | Generated |
 | `assets/css/style.css` | The only stylesheet |
 | `assets/img/` | Screenshots, icons, Open Graph image |
-| `build.py` | Generates every page above |
+| `build.py` | Layout, `<head>`, hreflang and sitemap. Contains no copy |
+| `common.py` | Constants, the locale registry and copy helpers |
+| `locales/` | All page copy, one module per language |
 | `serve.py` | Local preview server |
 
 ## Editing
 
-All page copy lives in `build.py`. Edit it there, then regenerate:
+All page copy lives in `locales/<code>.py` — English in `locales/en.py`. `build.py` holds the layout
+and no copy at all, so editing a page means editing its locale module, then regenerating:
 
 ```bash
 python3 build.py
@@ -51,6 +55,37 @@ GitHub Pages, Netlify, S3 or any static host with no pipeline.
 
 `content/privacy-policy.md` is a copy of `docs/PRIVACY_POLICY.md` from the app repo, with the H1
 removed (the page supplies its own). If the app's policy changes, copy it across and rebuild.
+
+Each language has its own `content/privacy-policy.<code>.md` (for example `privacy-policy.ko.md`);
+the build falls back to the English file if one is missing. Every translation opens with a note that
+the English version prevails if the two disagree, so the translations stay a reading convenience
+rather than a second legal text. **When the English policy changes, update the translations too.**
+
+## Languages
+
+The site ships in five languages: English at the root, and one subdirectory per translation.
+
+| Code | Directory | Language |
+| --- | --- | --- |
+| `en` | *(root)* | English — the source language, and the `x-default` target |
+| `zh-Hans` | `zh/` | Simplified Chinese |
+| `vi` | `vi/` | Vietnamese |
+| `pt-PT` | `pt/` | European Portuguese |
+| `ko` | `ko/` | Korean |
+
+Every page exists in every language, so the hreflang set is always complete and the footer language
+switcher links to the *same* page in each language rather than dumping the reader on a home page.
+
+Each `locales/<code>.py` exposes exactly three names — `LOCALE`, `UI` and `PAGES` (plus `NOT_FOUND`)
+— and `build.py` renders a language from those alone. A translation is therefore a copy of
+`locales/en.py` with the strings replaced: no template, layout or CSS changes are involved.
+
+To add a language, add an entry to `LOCALES` in `common.py` and a matching module in `locales/`.
+Nothing in `build.py` needs to change.
+
+Some things are deliberately *not* translated: the level names (Rookie … Master) and the tier labels,
+because they are what the app itself displays; `Runout Rank` and `Runout Pro`; and the app
+screenshots, since the app is English-only.
 
 ## Positioning
 
@@ -82,7 +117,8 @@ the subject and overreach costs more than it wins.
 
 ## Authorship and dates
 
-`AUTHOR_NAME` / `AUTHOR_TITLE` at the top of `build.py` drive a visible byline under the H1, plus
+`AUTHOR_NAME` in `common.py` and `author_title` in each locale's `UI` drive a visible byline under
+the H1, plus
 `<meta name="author">`, `article:published_time` / `article:modified_time`, and the `author` field of
 each `Article` block.
 
@@ -92,7 +128,8 @@ each `Article` block.
 the product pages deliberately carry neither: a byline on a landing page is noise, and the dates are
 there to give the guides authorial provenance, not to date the product.
 
-Dates come from two constants: `FIRST_PUBLISHED` (when the site went up) and `UPDATED` (the date of
+Dates come from two constants in `common.py`: `FIRST_PUBLISHED` (when the site went up) and
+`UPDATED` (the date of
 the current copy, and the sitemap `lastmod`). A page may override either with the `published` /
 `updated` keys in its `PAGES` entry — the newer positioning pages set `published=UPDATED`. **Bump
 `UPDATED` whenever you change page copy**, so the byline and the sitemap do not claim a page is
@@ -103,8 +140,11 @@ older than it is.
 Every page carries a unique `<title>` and meta description, a canonical URL, Open Graph and Twitter
 card tags, authorship and date metadata, and JSON-LD. `index.html` declares `SoftwareApplication`
 and `WebSite`; the FAQ declares `FAQPage`; the guide and the three positioning pages declare
-`Article` with a `Person` author; sub-pages declare `BreadcrumbList`. `sitemap.xml` is generated
-from the page list and referenced by `robots.txt`.
+`Article` with a `Person` author; sub-pages declare `BreadcrumbList`, and every block carries
+`inLanguage`. `sitemap.xml` is generated from the page list and referenced by `robots.txt`.
+
+Every page also carries the full `hreflang` set for all five languages plus `x-default` (pointing at
+English), in both the `<head>` and as `xhtml:link` alternates on each `sitemap.xml` entry.
 
 Images are sized (`width`/`height` set, so no layout shift), lazy-loaded below the fold, and the
 hero image is marked `fetchpriority="high"`. There is no client-side JavaScript and no external
@@ -112,17 +152,17 @@ request of any kind — no fonts, no analytics, no CDN — so the pages render i
 
 ## Before this goes live
 
-1. **Set the domain.** `SITE_URL` at the top of `build.py` is currently
+1. **Set the domain.** `SITE_URL` at the top of `common.py` is currently
    `https://mylesieong.github.io/products/runout-rank/`, which matches the privacy-policy URL quoted
    in `docs/STORE_LISTINGS.md`. Change it if the site lands anywhere else, then rebuild — canonical
-   tags, `og:url` and `sitemap.xml` all derive from it. Page links are relative, so the site works
+   tags, `og:url`, `hreflang` and `sitemap.xml` all derive from it. Page links are relative, so the site works
    at a domain root or in a subdirectory either way.
 2. **Fill in the privacy-policy placeholders.** `content/privacy-policy.md` still contains
    `[YOUR_LEGAL_ENTITY_NAME]`, `[YOUR_ADDRESS_OR_COUNTRY]`, `[YOUR_RETENTION_PERIOD]` and
    `[YOUR_SUPPORT_EMAIL]`, inherited from the app repo's copy. A published policy must not ship with
-   those.
-3. **Add the App Store link.** Google Play is live and linked (`PLAY_URL` in `build.py`). The iOS
-   build is still in review, so that half of `STORE_BLOCK` is a `store-link--pending` label rather
+   those. The four translated copies in `content/` carry the same placeholders.
+3. **Add the App Store link.** Google Play is live and linked (`PLAY_URL` in `common.py`). The iOS
+   build is still in review, so that half of `store_block()` is a `store-link--pending` label rather
    than a link — turn it into an `<a href>` once the listing is approved.
 4. **Verify ownership** in Google Search Console and Bing Webmaster Tools, and submit
    `sitemap.xml`.

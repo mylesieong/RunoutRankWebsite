@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>절대 레이팅과 상대 당구 레이팅: 사는 도시가 당신의 숫자를 바꾸는 이유 | Runout Rank</title>
+  <meta name="description" content="Elo, Glicko, Fargo Rate는 모두 상대적입니다. 각 레이팅이 다른 레이팅들로 이루어진 네트워크 속 한 위치이므로 경기 수와 지역 연결성이 모두 영향을 줍니다. 절대 당구 레이팅은 대신 무엇을 측정하고, 각각은 무엇에 좋은지 살펴봅니다.">
+  <meta name="keywords" content="절대 레이팅과 상대 당구 레이팅, 상대 레이팅 시스템, 당구 Elo 레이팅, 지역별 파고 레이팅 차이, 당구 레이팅 설명">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#111413">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="en" href="https://mylesieong.github.io/products/runout-rank/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://mylesieong.github.io/products/runout-rank/zh/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="vi" href="https://mylesieong.github.io/products/runout-rank/vi/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="pt-PT" href="https://mylesieong.github.io/products/runout-rank/pt/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="ko" href="https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html">
+  <link rel="alternate" hreflang="x-default" href="https://mylesieong.github.io/products/runout-rank/absolute-vs-relative-pool-rating.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Runout Rank">
+  <meta property="og:title" content="절대 레이팅과 상대 당구 레이팅: 사는 도시가 당신의 숫자를 바꾸는 이유 | Runout Rank">
+  <meta property="og:description" content="Elo, Glicko, Fargo Rate는 모두 상대적입니다. 각 레이팅이 다른 레이팅들로 이루어진 네트워크 속 한 위치이므로 경기 수와 지역 연결성이 모두 영향을 줍니다. 절대 당구 레이팅은 대신 무엇을 측정하고, 각각은 무엇에 좋은지 살펴봅니다.">
+  <meta property="og:url" content="https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html">
+  <meta property="og:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Runout Rank — 당신의 당구 실력, 정말 어느 정도일까요?">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="절대 레이팅과 상대 당구 레이팅: 사는 도시가 당신의 숫자를 바꾸는 이유 | Runout Rank">
+  <meta name="twitter:description" content="Elo, Glicko, Fargo Rate는 모두 상대적입니다. 각 레이팅이 다른 레이팅들로 이루어진 네트워크 속 한 위치이므로 경기 수와 지역 연결성이 모두 영향을 줍니다. 절대 당구 레이팅은 대신 무엇을 측정하고, 각각은 무엇에 좋은지 살펴봅니다.">
+  <meta name="twitter:image" content="https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png">
+  <meta name="author" content="Sai Ieong">
+  <meta name="date" content="2026-08-22">
+  <meta name="last-modified" content="2026-08-22">
+  <meta property="article:author" content="Sai Ieong">
+  <meta property="article:published_time" content="2026-08-22">
+  <meta property="article:modified_time" content="2026-08-22">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "\uc808\ub300 \ub808\uc774\ud305\uacfc \uc0c1\ub300 \ub2f9\uad6c \ub808\uc774\ud305: \uc0ac\ub294 \ub3c4\uc2dc\uac00 \ub2f9\uc2e0\uc758 \uc22b\uc790\ub97c \ubc14\uafb8\ub294 \uc774\uc720",
+  "description": "\uc0c1\ub300 \ub2f9\uad6c \ub808\uc774\ud305\uc774 \uc8fc\ubcc0 \uc0ac\ub78c\ub4e4\uc5d0\uac8c \uc88c\uc6b0\ub418\ub294 \uc774\uc720, \uc808\ub300 \ub808\uc774\ud305\uc740 \ub300\uc2e0 \ubb34\uc5c7\uc744 \uce21\uc815\ud558\ub294\uc9c0, \uadf8\ub9ac\uace0 \uc5b4\ub290 \ucabd\uc774 \uc5b4\ub5a4 \uc9c8\ubb38\uc5d0 \ub2f5\ud558\ub294\uc9c0.",
+  "image": "https://mylesieong.github.io/products/runout-rank/assets/img/og-image.png",
+  "author": {
+      "@type": "Person",
+      "name": "Sai Ieong",
+      "jobTitle": "Runout Rank \uc81c\uc791\uc790",
+      "url": "https://mylesieong.github.io/products/runout-rank/index.html"
+    },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Runout Rank",
+    "url": "https://mylesieong.github.io/products/runout-rank/"
+  },
+  "datePublished": "2026-08-22",
+  "dateModified": "2026-08-22",
+  "inLanguage": "ko",
+  "mainEntityOfPage": "https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "\ud648", "item": "https://mylesieong.github.io/products/runout-rank/ko/"},
+    {"@type": "ListItem", "position": 2, "name": "\uc808\ub300 \ub808\uc774\ud305\uacfc \uc0c1\ub300 \ub808\uc774\ud305", "item": "https://mylesieong.github.io/products/runout-rank/ko/absolute-vs-relative-pool-rating.html"}
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg>
+        Runout&nbsp;Rank
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="how-it-works.html">측정 방식</a></li>
+          <li><a href="levels.html">레벨</a></li>
+          <li><a href="practice.html">연습</a></li>
+          <li><a href="fargo-rate-alternative.html">Fargo Rate 비교</a></li>
+          <li><a href="runout-pro.html">Runout Pro</a></li>
+          <li><a href="faq.html">자주 묻는 질문</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <ol>
+          <li><a href="index.html">홈</a></li>
+          <li>절대 레이팅과 상대 레이팅</li>
+        </ol>
+      </nav>
+      <h1>절대 레이팅과 상대 당구 레이팅</h1>
+      <p class="lead">실력이 똑같은 두 사람이, 한 명은 강한 도시에 한 명은 조용한 도시에 있다는 이유로 몇
+      년씩 다른 상대 레이팅을 지니고 다닐 수 있습니다. 그건 계산의 결함이 아니라 &mdash;
+      &lsquo;상대적&rsquo;이라는 말의 뜻 그대로입니다. 그 차이가 무엇이고 각각의 레이팅이 무엇에 좋은지
+      정리했습니다.</p>
+      <p class="byline">
+        글 <span class="byline-author">Sai Ieong</span>,
+        Runout Rank 제작자 <span aria-hidden="true">&middot;</span>
+        게시일 <time datetime="2026-08-22">2026년 8월 22일</time>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>상대 레이팅이란 무엇인가</h2>
+      <p>상대 레이팅 &mdash; Elo, Glicko, Fargo Rate와 그 일가 &mdash; 에는 절대 기준이라는 개념이
+      없습니다. 그것이 아는 것은 결과뿐입니다. 당신이 그들을 이겼고, 그들은 또 누군가를 이겼다는 식이죠.
+      그런 결과가 충분히 큰 그물을 이루면, 시스템은 그 승패를 가장 잘 설명하는 숫자들의 조합을 찾아냅니다.
+      누구도 직접 측정되지 않습니다. 모든 레이팅은 다른 레이팅들로 이루어진 네트워크 속의 한 위치입니다.</p>
+      <p>우아한 설계이고 네트워크가 촘촘할 때는 놀라울 만큼 잘 작동합니다. 동시에 아무리 영리한 수학으로도
+      없앨 수 없는 두 가지 결과를 함께 가져옵니다.</p>
+
+      <h2>결과 하나: 많은 경기가 필요합니다</h2>
+      <p>결과 하나는 증거 1비트이고, 1비트는 매우 적습니다. 그래서 시스템은 당신을 운에서 떼어내기 위해
+      물량을 필요로 합니다 &mdash; FargoRate가 견고성 지표를 쓰고 레이팅을 확립되었다고 부르는 최소 기준을
+      200경기로 두며, 그때까지는 초기 레이팅을 숫자에 섞는 이유가 이것입니다. 그 값을 경기로 치르기
+      전까지, 당신의 레이팅은 일부는 당신에 대한 추측입니다.</p>
+
+      <h2>결과 둘: 이웃에 묶여 있습니다</h2>
+      <p>모든 레이팅이 다른 레이팅에 견주어 정의되므로, 한 무리의 사람들은 그들을 세계와 잇는 경기가 충분할
+      때에만 나머지와 올바르게 정렬됩니다. 그 연결이 얇은 곳 &mdash; 고립된 지역, 신생 리그, 오픈 대회에
+      거의 나가지 않는 씬 &mdash; 에서는 집단 전체가 다른 곳의 같은 숫자와 맞지 않는 수준에 자리 잡을 수
+      있습니다. FargoRate는 정확히 이 경우, 즉 거의 고립된 두 집단 중 한쪽이 다른 쪽에 비해 너무 높게
+      매겨진 상황을 골치 아픈 문제로 서술하고, 바로 그 이유로 레이팅이 확립된 상대와의 경기가 더 큰 값을
+      갖는다고 짚습니다.</p>
+      <p>사용자 입장의 실용적 번역은 이렇습니다. 당신의 도시에 강자가 가득하거나 더 넓은 레이팅 인구와
+      거의 이어져 있지 않다면, 당신의 숫자는 일부 당신의 주변에 대한 진술입니다. 서로 다른 씬에 있는 같은
+      수준의 두 사람이 같은 값으로 읽힐 이유가 없고, 둘 다 외부 사람들과 더 많이 치는 것 말고는 달리 할
+      수 있는 일이 없습니다.</p>
+
+      <h2>절대 레이팅이란 무엇인가</h2>
+      <p>절대 레이팅은 사람이 아니라 고정된 기준에 견주어 수행을 측정합니다. 골프 핸디캡은 파를 기준으로 그렇게
+      작동합니다. 육상은 시계를 기준으로 그렇게 작동합니다. 스톱워치는 트랙에 누가 더 있는지 상관하지 않고,
+      마닐라의 10.4초는 맨체스터의 10.4초입니다.</p>
+      <p>당구에는 전통적으로 그런 것이 없었습니다. 명백한 시계가 없기 때문이죠. Runout Rank가 그 등가물을
+      제공합니다. 정의된 배치 한 세트와 하나의 질문 &mdash; 이걸 다 칠 수 있습니까? 한 레벨에서 열 판,
+      판마다 한 번, 다시 치기와 건너뛰기 없이. 거기서 나오는 숫자는 전적으로 그 배치들에 대한 당신 자신의
+      결과로 계산됩니다.</p>
+      <p>그러니 강하거나 약할 상대 풀도 없고, 어긋나 흘러갈 대상도 없으며, 측정이 유효해지기까지 필요한
+      최소 경기 수도 없습니다. 첫 세션이 끝나면 레이팅이 손에 있고, 그것은 어디서나 같은 의미입니다.</p>
+
+      <h2>고정된 기준이 기억력 시험이 되지 않는 이유</h2>
+      <p>당연한 반론이 있습니다. 고정된 배치 묶음은 몇 번 쳐 보고 나면 실력을 측정하기를 멈춘다는 것이죠.
+      그때부터는 해법을 찾는 게 아니라 떠올리는 것이니까요.</p>
+      <p>Runout Rank는 판이 아니라 <em>난이도</em>를 고정하는 방식으로 그것을 피합니다. 레벨은 공개된
+      상수들의 묶음이고 &mdash; 목적구 개수, 프리볼 여부, 최소 간격, 방해구 &mdash; 배치는 매번 그 규칙
+      안에서 새로 생성됩니다. 같은 판을 두 번 보는 일은 없고, 모든 판이 같은 질문을 던집니다. 열 판을 연달아
+      치면 남은 운은 상쇄됩니다.</p>
+
+      <h2>절대 레이팅이 할 수 없는 것</h2>
+      <p>그것은 핸디캡 시스템이 아니며 그렇게 써서도 안 됩니다. 상대 레이팅은 특정한 두 사람 사이의 경기를
+      예측하기 위해 존재하고, 그 일에 있어서는 어떤 절대적 측정보다도 훨씬 낫습니다 &mdash; 경기 결과가
+      바로 그것을 이루는 재료이기 때문입니다.</p>
+      <p>절대 레이팅에도 정직하게 다뤄야 할 자기만의 변수가 있습니다. 장비 말입니다. 포켓을 깎은 형태,
+      테이블 크기, 천의 빠르기가 모두 런아웃의 난이도를 바꾸므로, 포켓이 좁은 9피트 테이블에서 받은 레이팅은
+      바 박스에서 받은 것과 다른 측정입니다. 조건을 고정하고, 실제로 경기하는 테이블에서 테스트하고, 자신의
+      숫자를 시간에 따라 비교하세요.</p>
+
+      <h2>당신에게 필요한 쪽은?</h2>
+      <div class="compare" style="margin:24px 0">
+        <div class="card">
+          <h3>이럴 때 상대 레이팅을</h3>
+          <ul class="ticks">
+            <li>경기나 대진을 위한 핸디캡이 필요할 때</li>
+            <li>리그나 대회가 그것을 요구할 때</li>
+            <li>이미 견고성을 유지할 만큼 공인 경기를 충분히 치르고 있을 때</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>이럴 때 절대 레이팅을</h3>
+          <ul class="ticks ticks--gold">
+            <li>한 시즌을 먼저 치르지 않고 지금 내 위치를 알고 싶을 때</li>
+            <li>혼자 연습하거나, 자주 이동하거나, 씬을 옮겨 다닐 때</li>
+            <li>순위만이 아니라 <em>무엇을 연습할지</em>를 알고 싶을 때</li>
+          </ul>
+        </div>
+      </div>
+      <p>둘은 서로 다른 질문에 답하며, 진지한 사람이라면 둘 다 지니고 다녀도 전혀 이상하지 않습니다.</p>
+
+      <div class="btn-row" style="margin-top:36px">
+        <a class="btn btn--primary" href="fargo-rate-alternative.html">Fargo Rate와 비교</a>
+        <a class="btn btn--ghost" href="how-it-works.html">레이팅 계산 방식</a>
+      </div>
+      <p class="disclaimer">Runout Rank는 독립적인 앱이며 FargoRate와 제휴, 보증, 연관 관계가
+      없습니다. 이 페이지에서 Fargo Rate에 대해 말한 내용은 모두
+      <a href="https://www.fargorate.com/" rel="nofollow">FargoRate가 직접 공개한 자료</a>에서 가져왔고
+      저희가 아는 한 가장 공정하게 서술했습니다. 좋은 시스템이며, 이 페이지는 그 설계가 특정한 유형의
+      사용자에게 맞는 지점과 맞지 않는 지점에 관한 이야기일 뿐입니다.</p>
+    </div>
+  </section>
+
+  <section class="cta band">
+    <div class="container">
+      <p class="eyebrow">당신의 숫자를 받으세요</p>
+      <h2>열 판. 판마다 단 한 번. 정직한 레이팅 하나.</h2>
+      <p class="lead" style="max-width:38rem;margin:0 auto 28px">늘 치던 그 테이블에 배치를 그대로 놓으세요.
+      앱이 런아웃을 채점하고, 다음에 어느 레벨에서 훈련해야 하는지 알려 줍니다.</p>
+      <div class="store-links" style="justify-content:center">
+        <a class="store-link" href="https://play.google.com/store/apps/details?id=com.municornio.app.tableinfinite"><span>다운로드</span><span>Google Play</span></a>
+        <div class="store-link store-link--pending" aria-label="App Store 심사 중"><span>심사 중</span><span>App Store</span></div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#111413"/>
+      <g transform="rotate(-14 32 32)">
+        <rect x="-8" y="22" width="80" height="20" fill="#1B5E3B"/>
+        <rect x="-8" y="20.4" width="80" height="1.6" fill="#404942"/>
+        <rect x="11.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 16 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="43.6" y="27.6" width="8.8" height="8.8" transform="rotate(45 48 32)" fill="none" stroke="#E8DCC8" stroke-width="3.4"/>
+        <rect x="26.5" y="26.5" width="11" height="11" transform="rotate(45 32 32)" fill="#F7BE1D"/>
+      </g>
+    </svg> Runout&nbsp;Rank</a>
+          <p style="margin-top:12px;max-width:24rem">당신이 늘 치는 그 테이블에서 열 판 런아웃 테스트를 치르고 절대 당구 레이팅을 받으세요. 한 번 앉은 자리에서 0&ndash;100 점수가 나옵니다 &mdash; 리그도, 200경기의 기다림도, 계정도, 인터넷도 필요 없습니다.</p>
+        </div>
+        <div>
+          <h4>앱</h4>
+          <ul>
+            <li><a href="how-it-works.html">측정 방식</a></li>
+            <li><a href="levels.html">여섯 개의 레벨</a></li>
+            <li><a href="practice.html">연습과 훈련 기록</a></li>
+            <li><a href="runout-pro.html">Runout Pro</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>가이드</h4>
+          <ul>
+            <li><a href="fargo-rate-alternative.html">Fargo Rate 대안</a></li>
+            <li><a href="pool-rating-without-a-league.html">리그 없이 받는 레이팅</a></li>
+            <li><a href="absolute-vs-relative-pool-rating.html">절대 레이팅과 상대 레이팅</a></li>
+            <li><a href="pool-skill-level-test.html">당구 실력 측정 가이드</a></li>
+            <li><a href="faq.html">자주 묻는 질문</a></li>
+            <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
+            <li><a href="../sitemap.xml">사이트맵</a></li>
+          </ul>
+        </div>
+      </div>
+      <nav class="lang-switch" aria-label="언어">
+        <h4>언어</h4>
+        <ul>
+          <li><a href="../absolute-vs-relative-pool-rating.html" hreflang="en" lang="en">English</a></li>
+          <li><a href="../zh/absolute-vs-relative-pool-rating.html" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+          <li><a href="../vi/absolute-vs-relative-pool-rating.html" hreflang="vi" lang="vi">Tiếng Việt</a></li>
+          <li><a href="../pt/absolute-vs-relative-pool-rating.html" hreflang="pt-PT" lang="pt-PT">Português</a></li>
+          <li><span aria-current="true" lang="ko">한국어</span></li>
+        </ul>
+      </nav>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Runout Rank. Sai Ieong이(가) 쓰고 만들었습니다.</span>
+        <span>안드로이드 &amp; iOS &middot; 앱과 마찬가지로 다크 모드 전용</span>
+      </div>
+      <p class="disclaimer">Fargo Rate와 FargoRate는 각 소유자의 상표입니다. Runout Rank는 독립적인 앱이며 FargoRate, BCA, APA 또는 어떤 리그 운영 주체와도 제휴, 보증, 연관 관계가 없습니다. 이 사이트의 비교는 해당 시스템들이 공개한 동작 방식을 설명한 것이며, 판단은 읽는 분의 몫으로 남겨 둡니다.</p>
+    </div>
+  </footer>
+</body>
+</html>
