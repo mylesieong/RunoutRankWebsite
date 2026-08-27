@@ -129,6 +129,7 @@ def footer(locale, ui, slug):
 {lang_switch(locale, ui, slug)}
       <div class="footer-bottom">
         <span>{copyright_line}</span>
+        <span>Part of <a href="https://mylesieong.github.io/">Sai vs. Reality</a></span>
         <span>{ui["footer_platforms"]}</span>
       </div>
       <p class="disclaimer">{ui["footer_disclaimer"]}</p>
