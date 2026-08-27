@@ -355,26 +355,26 @@ def build_locale(locale):
 
 
 def sitemap():
-    """One <url> per language per page, each listing the whole hreflang set."""
+    """One <url> per language per page.
+
+    The hreflang set is NOT repeated here. Every page already carries the
+    complete set as <link rel="alternate" hreflang> in its own <head>, which is
+    the declaration Google reads, and duplicating it as xhtml:link made the
+    sitemap fail validation against the official sitemap schema -- that schema
+    declares <url> with a strict wildcard that has no global element
+    declaration for xhtml:link. One declaration, in the HTML, is enough.
+    """
     entries = []
     for slug, priority in SITEMAP_PAGES:
-        alts = "\n".join(
-            f'    <xhtml:link rel="alternate" hreflang="{loc["code"]}" href="{page_url(loc, slug)}"/>'
-            for loc in LOCALES)
-        default = locale_by_code(DEFAULT_LOCALE)
-        alts += (f'\n    <xhtml:link rel="alternate" hreflang="x-default" '
-                 f'href="{page_url(default, slug)}"/>')
         for loc in LOCALES:
             entries.append(f"""  <url>
     <loc>{page_url(loc, slug)}</loc>
-{alts}
     <lastmod>{LASTMOD}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>{priority}</priority>
   </url>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(entries)}
 </urlset>
 """
